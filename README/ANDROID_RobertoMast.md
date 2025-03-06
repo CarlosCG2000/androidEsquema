@@ -2,9 +2,14 @@
 # PARTE ROBERTO - ANDROID CON KOTLIN Y COMPOSE
 
 # 1_CLASE `06/03/25`
+
 # __________ 0. Índice __________
 ## 1. Ver lo mismo en el `Android_Grado.md`
 ## 2. Creamos proyecto `primeraAppCompose`
+### 2.1. Ver como es una `actividad`
+### 2.2. `Interfaz` de usuario
+### 2.3. Lineas `logs`
+### 2.4. `Recursos`
 # _______________________________
 
 ## 1. Ver lo mismo en el `Android_Grado.md`
@@ -82,6 +87,7 @@
 
 
 ## 2. Creamos proyecto `primeraAppCompose`
+
 Desarrollo de la primera app a partir de `minuto 57:00`
 
 Android Studio: `New Proyect` --> `Empty Activity` (Compose)
@@ -90,24 +96,54 @@ Android Studio: `New Proyect` --> `Empty Activity` (Compose)
 Ya dentro de la App:
 - Podemos ver la jerarquía de archivos en varios formas distintas como `Proyect, Packages, Android, ...`
 
-1. Ver como es una `actividad`.
+### 2.1. Ver como es una `actividad`
  - Se declara en el `AndroidManifest.xml` y se define en un fichero de `Kotlin` con la interface de `ComponentActivity()`.
 - Dentro de la actividad se puede invocar a todos `los métodos del ciclo de vida (9)`: `onCreate, onStart, onRestoreInstanceState, onResume, onPause, onSaveInstanceState, onStop, onRestart, onDestroy`.
 El `ciclo de vida` se ejecuta por el `SO automaticamente`, no por nosotros.
 
-2. `Interfaz` de usuario.
+### 2.2. `Interfaz` de usuario
 - Puede tener una interfaz a través de `Compose` o `View` dependiendo del `setContent`. Podemos tener en un proyecto `una combinación` de actividades con pantallas de un tipo y del otro.
 - Puede tener un `Preview` si utilizamos interfaz a través de `Compose`.
 
-3. Lineas `logs`.
+### 2.3. Lineas `logs`
 ¿Como `simular una destrucción` de la app de `forma automática`?
 - Me voy a la carpeta del usuario:`cd`
 - Luego voy hasta la direccion: ` cd Library/Android/sdk/platform-tools`
 - Ejecutamos: `./adb shell am kill es.upsa.primeraappcompose`, sabiendo que `es.upsa.primeraappcompose` es el nombre del paquete de la aplicación.
 
-4. Recursos.
+### 2.4. `Recursos`
 Incampie en recursos `Strings` (cadena de caracteres). `No` definirlos como `literales` sino como `recursos` para vincularlos con `internacionalización`.
 
-Hay muchos tipo de recursos no solo de `Strings` tambien de `colors`, `plurals`, `arrays`, etc.
+- Hay muchos tipo de recursos no solo de `Strings` tambien de `colors`, `plurals`, `arrays`, etc.
+Ojo no se define igual en la interfaz de `@Compose`:
+```java
+@Composable // Quiere decir que va a definir una interface de usuario
+fun Greeting(name: String, modifier: Modifier = Modifier) { // Con parámetros por defecto
 
+    val saludo = stringResource(R.string.saludo) // Recurso de String
+    //...
+}
+```
+
+Que dentro de cualquier `método de la actividad`:
+```java
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    val saludo = getString(R.string.saludo) // Recurso de String
+    //...
+}
+```
+
+- `Internalización`, através del botón `Open editor`, dentro del archivo de recursos `Strings`.
+`Automaticamente` crea un `nuevo fichero` para la` traducción en el idioma` que hayamos seleccionado.
+Mediante atajos se pueden crear las variables como recurso `strings`.
+
+# 1_CLASE `07/03/25`
+
+# __________ 0. Índice __________
+## 1. ...
+# _______________________________
+
+## 1. ...
 

@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 
 // MI ACTIVIDAD
@@ -24,6 +25,9 @@ class MainActivity : ComponentActivity() // Esta clase es una Actividad,ya que e
 //  Bundle? por que es ?: porque si se cierra manualmente es nula esa variable por lo que tiene que ser el tipo opcional.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Recurso de String (se define diferente aqui (actividad) que en la interface)
+        val saludo = getString(R.string.saludo) // resources.getString(R.string.saludo)
 
 //      Si utilizasemos 'Compose' en vez de 'View'
         setContent { // Especificamos que es lo que se tiene que mostrar
@@ -77,15 +81,17 @@ class MainActivity : ComponentActivity() // Esta clase es una Actividad,ya que e
 //    }
 }
 
-
-
 // ESTA FUERA DE LA ACTIVIDAD, SON FUNCIONES EXTERNAS
 
 // Una función que defina una interface de usuario tiene que ser '@Composable'
 @Composable // Quiere decir que va a definir una interface de usuario
 fun Greeting(name: String, modifier: Modifier = Modifier) { // Con parámetros por defecto
+
+    // Recurso de String (se define diferente aqui (interface) que en la actividad)
+    val saludo = stringResource(R.string.saludo)
+
     Text(
-        text = "Hello ${name.uppercase()}!", // Lo que se muestra por pantalla
+        text = "$saludo ${name.uppercase()}!", // Lo que se muestra por pantalla
         modifier = modifier
     )
 }

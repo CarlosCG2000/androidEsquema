@@ -17,7 +17,6 @@ import es.upsa.appprimeracompose.ui.theme.AppPrimeraComposeTheme
 // MI ACTIVIDAD
 class MainActivity : ComponentActivity() // Esta clase es una Actividad,ya que extiende de 'ComponentActivity()'.
 {
-
     //  ETIQUETA DEL NOMBRE DE LA CLASE PARA EL LOG
     companion object { // Para declarar variables estaticas
         val TAG: String = MainActivity.javaClass.name // MainActivity::class.java.name
@@ -106,3 +105,21 @@ fun Greeting(name: String, modifier: Modifier = Modifier) { // Con parámetros p
 fun GreetingPreview() {
     Greeting("Android")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

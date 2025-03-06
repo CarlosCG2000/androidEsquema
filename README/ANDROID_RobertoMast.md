@@ -147,4 +147,3 @@ Mediante atajos se pueden crear las variables como recurso `strings`.
 
 ## 1. ...
 
-

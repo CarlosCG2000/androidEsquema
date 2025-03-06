@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvRed"
+        tools:text="89"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintHeight_percent="0.15"
+    />
+
+    <TextView
+        android:id="@+id/tvGreen"
+        tools:text="89"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintHeight_percent="0.15"
+    />
+
+    <TextView
+        android:id="@+id/tvBlue"
+        tools:text="89"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintHeight_percent="0.15"
+    />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowColors"
+        app:constraint_referenced_ids="tvRed,tvGreen,tvBlue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineTop"
+    />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    />
+
+
+
+    <TextView
+        android:id="@+id/tvAlphaLabel"
+        android:text="@string/label_alpha"
+        android:textAlignment="textEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="15"
+    />
+
+    <SeekBar
+        android:id="@+id/sbAlpha"
+        android:max="255"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="85"
+    />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowAlpha"
+        app:constraint_referenced_ids="tvAlphaLabel,sbAlpha"
+        app:flow_horizontalStyle="packed"
+        app:flow_horizontalGap="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+    />
+
+    <TextView
+        android:id="@+id/tvRedLabel"
+        android:text="@string/label_red"
+        android:textAlignment="textEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="15"
+    />
+
+    <SeekBar
+        android:id="@+id/sbRed"
+        android:max="255"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="85"
+    />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowRed"
+        app:constraint_referenced_ids="tvRedLabel,sbRed"
+        app:flow_horizontalStyle="packed"
+        app:flow_horizontalGap="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+    />
+
+    <TextView
+        android:id="@+id/tvGreenLabel"
+        android:text="@string/label_green"
+        android:textAlignment="textEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="15"
+    />
+
+    <SeekBar
+        android:id="@+id/sbGreen"
+        android:max="255"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="85"
+    />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowGreen"
+        app:constraint_referenced_ids="tvGreenLabel,sbGreen"
+        app:flow_horizontalStyle="packed"
+        app:flow_horizontalGap="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+    />
+
+    <TextView
+        android:id="@+id/tvBlueLabel"
+        android:text="@string/label_blue"
+        android:textAlignment="textEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="15"
+    />
+
+    <SeekBar
+        android:id="@+id/sbBlue"
+        android:max="255"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="85"
+    />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowBlue"
+        app:constraint_referenced_ids="tvBlueLabel,sbBlue"
+        app:flow_horizontalStyle="packed"
+        app:flow_horizontalGap="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+    />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBotton"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flowSeekBars"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="flowAlpha,flowRed,flowGreen,flowBlue"
+        app:flow_verticalStyle="spread_inside"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="@id/guidelineBotton"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBotton"
+    />
+
+    <TextView
+        android:id="@+id/tvColor"
+        android:background="@drawable/card"
+        tools:text="#FFFF00FF"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.25"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flowColors"
+        app:layout_constraintBottom_toTopOf="@id/flowSeekBars"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

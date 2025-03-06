@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Colors</string>
+    <string name="hex" formatted="true">%1$2X</string>
+</resources>

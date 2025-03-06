@@ -1,27 +1,31 @@
-package es.upsa.primeraappcompose
+package es.upsa.appprimeracompose
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import es.upsa.appprimeracompose.ui.theme.AppPrimeraComposeTheme
 
 // MI ACTIVIDAD
 class MainActivity : ComponentActivity() // Esta clase es una Actividad,ya que extiende de 'ComponentActivity()'.
 {
 
-//  ETIQUETA DEL NOMBRE DE LA CLASE PARA EL LOG
+    //  ETIQUETA DEL NOMBRE DE LA CLASE PARA EL LOG
     companion object { // Para declarar variables estaticas
         val TAG: String = MainActivity.javaClass.name // MainActivity::class.java.name
     }
 
 //  EN EL CICLO DE VISTA (9 MÉTODOS POSIBLES)
 
-//  Creación de la aplicación con parámetro que recibe para restaurar el estado en caso de cerrarse automáticamente la app.
+    //  Creación de la aplicación con parámetro que recibe para restaurar el estado en caso de cerrarse automáticamente la app.
 //  Bundle? por que es ?: porque si se cierra manualmente es nula esa variable por lo que tiene que ser el tipo opcional.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +36,7 @@ class MainActivity : ComponentActivity() // Esta clase es una Actividad,ya que e
 //      Si utilizasemos 'Compose' en vez de 'View'
         setContent { // Especificamos que es lo que se tiene que mostrar
             Greeting( name = "Android", modifier = Modifier ) // Notación nominal de los parámetros en vez de posicional.
-        //  Greeting( "Android", Modifier ) // Notación posicional de los parámetros en vez de nominal.
+            //  Greeting( "Android", Modifier ) // Notación posicional de los parámetros en vez de nominal.
         }
 //      Si utilizasemos 'View' en vez de 'Compose'
 //      setContentView(R.layout.activity_main)
@@ -100,5 +104,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) { // Con parámetros p
 @Preview(showBackground = true) // Ver la Preview
 @Composable
 fun GreetingPreview() {
-        Greeting("Android")
+    Greeting("Android")
 }

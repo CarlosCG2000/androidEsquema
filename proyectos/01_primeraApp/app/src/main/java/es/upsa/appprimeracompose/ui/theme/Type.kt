@@ -1,4 +1,4 @@
-package es.upsa.primeraappcompose.ui.theme
+package es.upsa.appprimeracompose.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PrimeraAppCompose"
+        android:theme="@style/Theme.AppPrimeraCompose"
         tools:targetApi="31">
 
         <!-- COMPONENTES DE MI PROYECTO -->
@@ -20,7 +20,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.PrimeraAppCompose">
+            android:theme="@style/Theme.AppPrimeraCompose">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +28,9 @@
             </intent-filter>
         </activity>
 
-        <!-- OTROS COMPONENTES ... -->
-        
+        <!-- OTROS COMPONENTES -->
+        <!-- ... -->
+
 
     </application>
 

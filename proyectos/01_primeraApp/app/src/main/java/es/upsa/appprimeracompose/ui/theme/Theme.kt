@@ -1,4 +1,4 @@
-package es.upsa.primeraappcompose.ui.theme
+package es.upsa.appprimeracompose.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -34,7 +34,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun PrimeraAppComposeTheme(
+fun AppPrimeraComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

@@ -3,7 +3,7 @@
   <component name="ProjectMigrations">
     <option name="MigrateToGradleLocalJavaHome">
       <set>
-        <option value="$PROJECT_DIR$/../../../Parte 1 - Roberto (Introducción al desarrollo de aplicaciones Android)/proyectos/01_primeraApp" />
+        <option value="$PROJECT_DIR$/../../../Parte 1 - Roberto (Introducción al desarrollo)/proyectos/01_primeraApp" />
       </set>
     </option>
   </component>

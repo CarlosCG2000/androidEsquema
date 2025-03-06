@@ -1,4 +1,4 @@
-package es.upsa.primeraappcompose
+package es.upsa.appprimeracompose
 
 import org.junit.Test
 

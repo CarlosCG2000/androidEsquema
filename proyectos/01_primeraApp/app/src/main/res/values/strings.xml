@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">primeraAppCompose</string>
+    <string name="app_name">appPrimeraCompose</string>
     <string name="saludo">Hola</string>
     <string name="nombre" translatable="false">Carlos</string>
 </resources>

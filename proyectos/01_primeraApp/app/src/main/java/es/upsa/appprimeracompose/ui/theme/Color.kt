@@ -1,4 +1,4 @@
-package es.upsa.primeraappcompose.ui.theme
+package es.upsa.appprimeracompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

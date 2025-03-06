@@ -1,7 +1,7 @@
 
 # PARTE ROBERTO - ANDROID CON KOTLIN Y COMPOSE
 
-# 1_CLASE `06/03/25`
+# 1_CLASE `05/03/25`
 
 # __________ 0. Índice __________
 ## 1. Ver lo mismo en el `Android_Grado.md`
@@ -139,11 +139,12 @@ override fun onCreate(savedInstanceState: Bundle?) {
 `Automaticamente` crea un `nuevo fichero` para la` traducción en el idioma` que hayamos seleccionado.
 Mediante atajos se pueden crear las variables como recurso `strings`.
 
-# 1_CLASE `07/03/25`
+# 2_CLASE `06/03/25`
 
 # __________ 0. Índice __________
 ## 1. ...
 # _______________________________
 
 ## 1. ...
+
 

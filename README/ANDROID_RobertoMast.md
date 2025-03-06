@@ -147,3 +147,19 @@ Mediante atajos se pueden crear las variables como recurso `strings`.
 
 ## 1. ...
 
+
+* El método `setContent` contiene dos parámetros:
+- un parámetro xxxx por defecto es un null.
+- otro parámetro como una `expresión lambda` que nosotros estamos añadiendo.
+
+* `Vistas`: debe de haber solo una contenedora.
+Siempre tienen que tener unas dimesiones (ancho y alto) de si es en unidad exacta utilizar `dp`.
+
+Tipos de vistas:
+- `FrameLayout`, en vistas. Uso de la propiedad `gravity` (layout_gravity)para la `posición`.
+- `FrameLayout` en Compose. Definimos un fichero con su una función `@Composable`. Creamos otra función con `Preview`.
+
+- `LinearLayout`. En `vistas` y en `compose`.
+
+- `ConstrainLayout`. En `vistas` y en `compose`.
+Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.

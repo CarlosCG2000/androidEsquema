@@ -4,7 +4,7 @@
 # 1_CLASE `06/03/25`
 # __________ 0. Índice __________
 ## 1. Ver lo mismo en el `Android_Grado.md`
-## ...
+## 2. Creamos proyecto `primeraAppCompose`
 # _______________________________
 
 ## 1. Ver lo mismo en el `Android_Grado.md`
@@ -81,9 +81,33 @@
     6. Tip: `filtro de error`
 
 
-## 2. Creamos proyecto `primeraAppCompone`
+## 2. Creamos proyecto `primeraAppCompose`
 Desarrollo de la primera app a partir de `minuto 57:00`
 
 Android Studio: `New Proyect` --> `Empty Activity` (Compose)
 - Al ser `Compose` (obliga a ser solo con `Kotlin`)
+
+Ya dentro de la App:
+- Podemos ver la jerarquía de archivos en varios formas distintas como `Proyect, Packages, Android, ...`
+
+1. Ver como es una `actividad`.
+ - Se declara en el `AndroidManifest.xml` y se define en un fichero de `Kotlin` con la interface de `ComponentActivity()`.
+- Dentro de la actividad se puede invocar a todos `los métodos del ciclo de vida (9)`: `onCreate, onStart, onRestoreInstanceState, onResume, onPause, onSaveInstanceState, onStop, onRestart, onDestroy`.
+El `ciclo de vida` se ejecuta por el `SO automaticamente`, no por nosotros.
+
+2. `Interfaz` de usuario.
+- Puede tener una interfaz a través de `Compose` o `View` dependiendo del `setContent`. Podemos tener en un proyecto `una combinación` de actividades con pantallas de un tipo y del otro.
+- Puede tener un `Preview` si utilizamos interfaz a través de `Compose`.
+
+3. Lineas `logs`.
+¿Como `simular una destrucción` de la app de `forma automática`?
+- Me voy a la carpeta del usuario:`cd`
+- Luego voy hasta la direccion: ` cd Library/Android/sdk/platform-tools`
+- Ejecutamos: `./adb shell am kill es.upsa.primeraappcompose`, sabiendo que `es.upsa.primeraappcompose` es el nombre del paquete de la aplicación.
+
+4. Recursos.
+Incampie en recursos `Strings` (cadena de caracteres). `No` definirlos como `literales` sino como `recursos` para vincularlos con `internacionalización`.
+
+Hay muchos tipo de recursos no solo de `Strings` tambien de `colors`, `plurals`, `arrays`, etc.
+
 

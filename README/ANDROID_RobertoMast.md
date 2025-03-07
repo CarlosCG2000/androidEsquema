@@ -144,7 +144,8 @@ Mediante atajos se pueden crear las variables como recurso `strings`.
 # __________ 0. Índice __________
 ## 1. Respecto a `Kotlin`. El método `setContent`
 ### 1.1 Explicación `expresiones Lambda`
-## 2.
+## 2. ¿Ques un `ViewGroup`?
+## ...
 # _______________________________
 
 Vamos a ver como diseñar los interface tanto mediante vistas pero sobretodo con Compose.
@@ -198,26 +199,38 @@ El `setContent` es un método formado por dos parámetros:
     }
 ```
 
-## 2. `FrameLayout`
+## 2. ¿Ques un `ViewGroup`?
+Todas las vistas (`Button, TextView, ViewGroup, etc`) extienden de `View`.
+Un `ViewGroup` sirve para extructurar las vistas. Y hay distintos `ViewGroup` dependiendo de la organización.
+Un `ViewGroup` al ser una vista puede contener a la vez varios `ViewGroup`.
+Hay 3 tipos de `ViewGroup` dependendiendo de la organización: `FrameLayout`, `LinearLayout`, `ConstrainLayout`.
 
-### 2.1 Vista
+## 3. ViewGroup `FrameLayout`
+
+### 3.1 Vista
 Tiene que ser un `recurso (res)` de `tipo Layout`.
 Nombre del fichero `frame_layout` y 'root element' ponerlo como `FrameLayout`.
 
+Es un `XML` donde solo puede conteneder como elemento raiz una única `ViewGroup` (vista).
+Siempre tienen que tener `unas dimesiones` (ancho y alto) de si es en unidad exacta utilizar `dp` (para ser proporcionales en todos los dispositivos).
+
+Atributos:
+Se puede colocar en una de las 9 referencias que hay, dando una posición horizontal y vertical.
+- `gravity`: `android:layout_gravity="bottom|end"`
+
+### 3.2 Compose
+Creamos dentro de la lógica un paquete que llamamos `screens` y un fichero llamado `FrameLayout`
+
+Creamos una función `@Composable` y otra `Preview`.
+...
+MIN 1:16:19
+
+## 4. ViewGroup `LinearLayout`
 
 
-### 2.2 Compose
+### 4.1 Vista
 
+### 4.2 Compose
 
-
-* `Vistas`: debe de haber solo una contenedora.
-Siempre tienen que tener unas dimesiones (ancho y alto) de si es en unidad exacta utilizar `dp`.
-
-Tipos de vistas:
-- `FrameLayout`, en vistas. Uso de la propiedad `gravity` (layout_gravity)para la `posición`.
-- `FrameLayout` en Compose. Definimos un fichero con su una función `@Composable`. Creamos otra función con `Preview`.
-
-- `LinearLayout`. En `vistas` y en `compose`.
-
-- `ConstrainLayout`. En `vistas` y en `compose`.
+- `ConstrainLayout`.
 Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.

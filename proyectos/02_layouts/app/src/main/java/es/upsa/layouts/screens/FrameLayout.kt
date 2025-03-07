@@ -3,10 +3,8 @@ package es.upsa.layouts.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -23,15 +21,13 @@ fun FrameLayoutScreen01(){
     // Metodo Box: equivalente a un 'FrameLayout'
     Box( modifier = Modifier.fillMaxSize() // que ocupa lo máximo de anchura y altura
                             .background(Color.White) // color de fondo blanco
-    )
-    { // expresión lambda
+    ){ // expresión lambda
         Button(
             onClick = {  }, // otra expresión lambda
             modifier = Modifier.align(Alignment.BottomEnd)
         )
         { Text(text = "A",
-              modifier = Modifier// .fillMaxWidth()
-        ) }
+              modifier = Modifier)}// .fillMaxWidth()
 
         Button(
             onClick = { },

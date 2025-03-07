@@ -205,7 +205,7 @@ Un `ViewGroup` sirve para extructurar las vistas. Y hay distintos `ViewGroup` de
 Un `ViewGroup` al ser una vista puede contener a la vez varios `ViewGroup`.
 Hay 3 tipos de `ViewGroup` dependendiendo de la organización: `FrameLayout`, `LinearLayout`, `ConstrainLayout`.
 
-## 3. ViewGroup `FrameLayout`
+## 3. ViewGroup `FrameLayout` - `Box`
 
 ### 3.1 Vista
 Tiene que ser un `recurso (res)` de `tipo Layout`.
@@ -221,16 +221,44 @@ Se puede colocar en una de las 9 referencias que hay, dando una posición horizo
 ### 3.2 Compose
 Creamos dentro de la lógica un paquete que llamamos `screens` y un fichero llamado `FrameLayout`
 
-Creamos una función `@Composable` y otra `Preview`.
-...
-MIN 1:16:19
+Creamos un método `@Composable` y otra `Preview`.
 
-## 4. ViewGroup `LinearLayout`
+- El método `@Composable`.
+Equivale al método `Box`: actual se le pueden pasar atributos como `modifier` (el cual puede tener otros atributos para darle forma, color, tamaño, etc), `contentAlignment`, `propagateMinConstraints`, etc.
 
+Y tenemos dentro del `Box` otras vistas como pueden ser `Textview` o `Button` de las cual de la misma forma son métodos que pueden atributos como `modifier`, etc.
+
+- El método `Preview`.
+Es la preview donde se pueden personalizar los elementos con las caracteristicas que tiene que tener mi visualizador gráfico. Desde `la rueda` se puede configurar.
+
+## 4. ViewGroup `LinearLayout` - `Column`|`Row`
 
 ### 4.1 Vista
+Tiene que ser un `recurso (res)` de `tipo Layout`.
+Nombre del fichero `linear_layout` y 'root element' ponerlo como `LinearLayout`.
+
+Un `Linear` me distribuye las vistas que contiene, una a continuación de la otra. La orientación puede ser
+`vertical` u `horizontal`.
+
+Si se elegi con una orientación dicha orientanción no se podria modificar sobre el elemento solo la otra otrientación.
+
+Atributos:
+- `gravity`: `android:layout_gravity="center"` o en el padre raiz `android:gravity="bottom"`
 
 ### 4.2 Compose
+Creamos dentro de la lógica en el paquete `screens` un fichero llamado `LinearLayout`
+
+Creamos un método `@Composable` y otra `Preview`.
+
+- El método `@Composable`.
+Equivale al método `Column`|`Row`.
+
+No hay `margin` sino solo usa `padding`.
+
+- El método `Preview`.
+
+
+MIN 1:45:47
 
 - `ConstrainLayout`.
 Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.

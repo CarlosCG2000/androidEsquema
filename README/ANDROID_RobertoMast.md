@@ -142,15 +142,73 @@ Mediante atajos se pueden crear las variables como recurso `strings`.
 # 2_CLASE `06/03/25`
 
 # __________ 0. Índice __________
-## 1. ...
+## 1. Respecto a `Kotlin`. El método `setContent`
+### 1.1 Explicación `expresiones Lambda`
+## 2.
 # _______________________________
 
-## 1. ...
+Vamos a ver como diseñar los interface tanto mediante vistas pero sobretodo con Compose.
+Creamos nuevo proyecto a través de Kotlin y Compose llamado `Layouts`.
+
+## 1. Respecto a `Kotlin`. El método `setContent`
+Si queriamos definir una intefaz de usuario teniamos que invocar desde nuestra actividad con el método `setContent`que heredabamos de la actividad.
+
+El `setContent` es un método formado por dos parámetros:
+1. `CompositionContext` por defecto es un null.
+2.  `Expresión lambda` que es la que nosotros estamos añadiendo. La cual tiene 0 párametros y no devuelve ningun parámetro.
+
+```java
+    public fun ComponentActivity.setContent(
+        parent: CompositionContext? = null, // 1 parámetro (CompositionContext)
+        content: @Composable (() -> Unit) // 2 parámetro (expresión lambda)
+    ): Unit
+```
+
+```java
+    /*public fun ComponentActivity.*/setContent(
+        // parent: CompositionContext? = null, // No hace falt por defect ya es null
+        // content: @Composable (() -> Unit) // Es una expresión lambda, sin parámetros (y sin devolver nada)
+    ){ // Aqui es donde se define la expresión lambda
+        // sentencias...
+    }
+```
+
+### 1.1 Explicación `expresiones Lambda`
+```java
+    // 1. Expresión lambda con más de un parámetro
+    val funcionLambda: (Int, Int) -> Unit = { num1, num2 ->
+        // sentencias.......
+    }
+
+    // 2. Expresión lambda con uno (o cero) parámetros
+    // Si solo es un parámetro se puede omitir el pasarselo y se utiliza 'it' por defecto como dicho parámetro. Si no se pasa ningun parámetro tambien se puede omitir la flecha.
+    val funcionLambda: (Int) -> Unit = { /* num1 -> */
+        // sentencias con el parámetro it.......
+    }
+
+    // 3. Función
+    // Si ahora tengo una función y tengo como parámetro un expresión lambda
+    fun xxx(f: (Int, Int)->Unit):Unit {
+
+    }
+
+    // Para la invocación de la función al solo tener como parametro una expresión lambda se permite no poner los parentesis y escribir a continuación la expresión lambda
+    xxx/*()*/ {
+        p1, p2 -> sentencias
+    }
+```
+
+## 2. `FrameLayout`
+
+### 2.1 Vista
+Tiene que ser un `recurso (res)` de `tipo Layout`.
+Nombre del fichero `frame_layout` y 'root element' ponerlo como `FrameLayout`.
 
 
-* El método `setContent` contiene dos parámetros:
-- un parámetro xxxx por defecto es un null.
-- otro parámetro como una `expresión lambda` que nosotros estamos añadiendo.
+
+### 2.2 Compose
+
+
 
 * `Vistas`: debe de haber solo una contenedora.
 Siempre tienen que tener unas dimesiones (ancho y alto) de si es en unidad exacta utilizar `dp`.

@@ -143,7 +143,7 @@ Mediante atajos se pueden crear las variables como recurso `strings`.
 
 # __________ 0. Índice __________
 ## 1. Respecto a `Kotlin`. El método `setContent`
-### 1.1 Explicación `expresiones Lambda`
+### 1.1. Explicación `expresiones Lambda`
 ## 2. ¿Ques un `ViewGroup`?
 ## ...
 # _______________________________
@@ -174,7 +174,7 @@ El `setContent` es un método formado por dos parámetros:
     }
 ```
 
-### 1.1 Explicación `expresiones Lambda`
+### 1.1. Explicación `expresiones Lambda`
 ```java
     // 1. Expresión lambda con más de un parámetro
     val funcionLambda: (Int, Int) -> Unit = { num1, num2 ->
@@ -207,7 +207,7 @@ Hay 3 tipos de `ViewGroup` dependendiendo de la organización: `FrameLayout`, `L
 
 ## 3. ViewGroup `FrameLayout` - `Box`
 
-### 3.1 Vista
+### 3.1. Vista
 Tiene que ser un `recurso (res)` de `tipo Layout`.
 Nombre del fichero `frame_layout` y 'root element' ponerlo como `FrameLayout`.
 
@@ -218,7 +218,7 @@ Atributos:
 Se puede colocar en una de las 9 referencias que hay, dando una posición horizontal y vertical.
 - `gravity`: `android:layout_gravity="bottom|end"`
 
-### 3.2 Compose
+### 3.2. Compose
 Creamos dentro de la lógica un paquete que llamamos `screens` y un fichero llamado `FrameLayout`
 
 Creamos un método `@Composable` y otra `Preview`.
@@ -233,7 +233,7 @@ Es la preview donde se pueden personalizar los elementos con las caracteristicas
 
 ## 4. ViewGroup `LinearLayout` - `Column`|`Row`
 
-### 4.1 Vista
+### 4.1. Vista
 Tiene que ser un `recurso (res)` de `tipo Layout`.
 Nombre del fichero `linear_layout` y 'root element' ponerlo como `LinearLayout`.
 
@@ -245,7 +245,7 @@ Si se elegi con una orientación dicha orientanción no se podria modificar sobr
 Atributos:
 - `gravity`: `android:layout_gravity="center"` o en el padre raiz `android:gravity="bottom"`
 
-### 4.2 Compose
+### 4.2. Compose
 Creamos dentro de la lógica en el paquete `screens` un fichero llamado `LinearLayout`
 
 Creamos un método `@Composable` y otra `Preview`.
@@ -254,11 +254,20 @@ Creamos un método `@Composable` y otra `Preview`.
 Equivale al método `Column`|`Row`.
 
 No hay `margin` sino solo usa `padding`.
+Se pueden asignar `pesos` através del `Modifier`: `.weight(1f)` mediante un float
 
 - El método `Preview`.
 
+### 4.3. Realizar `ejercicio 1`
+MIN 1:48:39
 
-MIN 1:45:47
+## 5. ViewGroup `ConstrainLayout` - `XXXX`
 
-- `ConstrainLayout`.
 Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.
+
+
+
+
+
+
+

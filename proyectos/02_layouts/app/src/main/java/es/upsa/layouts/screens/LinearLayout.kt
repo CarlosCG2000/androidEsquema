@@ -24,12 +24,13 @@ fun LinearLayoutVertical(){
     Column( modifier = Modifier.fillMaxSize()
                     .background(Color.White),
         // horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.SpaceBetween // espacio sobrante otras: .spacedBy(50.dp), SpaceRound, SpaceEvenly
+        // verticalArrangement = Arrangement.SpaceBetween // espacio sobrante otras: .spacedBy(50.dp), SpaceRound, SpaceEvenly
 
     ) {
         Button(
             onClick = {},
             modifier = Modifier.padding(start = 100.dp)
+                .weight(0.5f)
 
         ) { Text("A") }
 
@@ -41,7 +42,7 @@ fun LinearLayoutVertical(){
         Button(
             onClick = {},
             modifier = Modifier.align(Alignment.End)
-
+                                        .weight(1f)
         ) { Text("C") }
 
         Button(

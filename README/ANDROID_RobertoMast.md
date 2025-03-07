@@ -261,7 +261,7 @@ Se pueden asignar `pesos` através del `Modifier`: `.weight(1f)` mediante un flo
 ### 4.3. Realizar `ejercicio 1`
 En el minuto 1:48:39
 
-## 5. ViewGroup `ConstrainLayout` - `XXXX`
+## 5. ViewGroup `ConstrainLayout` - `ConstraintLayout`
 Tiene que ser un `recurso (res)` de `tipo Layout`.
 Nombre del fichero `constraint_layout` y 'root element' ponerlo como `xxx`. No deja hacerlo porque hay que añadir las librerias correspondientes.
 
@@ -271,5 +271,11 @@ Vamos a `File` --> `Proyect Structure` --> `Dependencies` --> `Add Library Depen
 
 Nombre del fichero `constraint_layout` y 'root element' ponerlo como `androidx.constraintlayout.widget.ConstraintLayout`.
 
+### 5.1. Vista
+Ya visto en apuntes de la asignatura del grado con el readme `Android_Grado.md`
 
+### 5.2. Compose
+- El método `@Composable` y `Preview`.
+
+Asignarle id y bias (sesgos).
 

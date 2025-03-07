@@ -277,5 +277,5 @@ Ya visto en apuntes de la asignatura del grado con el readme `Android_Grado.md`
 ### 5.2. Compose
 - El método `@Composable` y `Preview`.
 
-Asignarle id y bias (sesgos).
+Asignarle `id` y `bias (sesgos)` y dimensión `0dp (que dependa del contraints)`.
 

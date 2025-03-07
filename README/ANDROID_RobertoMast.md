@@ -262,14 +262,14 @@ Se pueden asignar `pesos` através del `Modifier`: `.weight(1f)` mediante un flo
 En el minuto 1:48:39
 
 ## 5. ViewGroup `ConstrainLayout` - `XXXX`
+Tiene que ser un `recurso (res)` de `tipo Layout`.
+Nombre del fichero `constraint_layout` y 'root element' ponerlo como `xxx`. No deja hacerlo porque hay que añadir las librerias correspondientes.
 
+- Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.
 
+Vamos a `File` --> `Proyect Structure` --> `Dependencies` --> `Add Library Dependency` --> Buscamos por `constraintlayout` --> Pulsamos a la `libreria normal` --> Realizamos los mismo pasos para en vez de la libreria normal recoger la de `constraintlayout compose`.
 
-Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.
-
-
-
-
+Nombre del fichero `constraint_layout` y 'root element' ponerlo como `androidx.constraintlayout.widget.ConstraintLayout`.
 
 
 

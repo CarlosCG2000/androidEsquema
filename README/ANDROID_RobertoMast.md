@@ -259,9 +259,11 @@ Se pueden asignar `pesos` através del `Modifier`: `.weight(1f)` mediante un flo
 - El método `Preview`.
 
 ### 4.3. Realizar `ejercicio 1`
-MIN 1:48:39
+En el minuto 1:48:39
 
 ## 5. ViewGroup `ConstrainLayout` - `XXXX`
+
+
 
 Añadir un `libreria` para poder utilizar `ConstrainLayout` en Compose.
 

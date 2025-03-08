@@ -288,3 +288,9 @@ Ya visto en apuntes de la asignatura del grado en el readme `Android_Grado.md`
 
 Asignarle `id`, `bias (sesgos)` y peso con dimensión `0dp (que dependa del contraints)`.
 
+Propiedad principales:
+- definir ids: `val (idBtA, idBtB, idBtC) = CreateRefs()`
+- llamar ids: `Modifier.costraintAs(id)`
+- enlazar con otros layout: `top.linkTo(idBtC.bottom)`, baseline, top, bottom, start, end
+
+Resumen `ConstraintLayout` con Compose:

@@ -294,3 +294,6 @@ Propiedad principales:
 - enlazar con otros layout: `top.linkTo(idBtC.bottom)`, baseline, top, bottom, start, end
 
 Resumen `ConstraintLayout` con Compose:
+
+Ya luego lo hago....
+

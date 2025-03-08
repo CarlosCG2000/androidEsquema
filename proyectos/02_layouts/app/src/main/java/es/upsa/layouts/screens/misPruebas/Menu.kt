@@ -12,9 +12,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,7 +36,9 @@ import androidx.compose.ui.unit.sp
 import es.upsa.layouts.R
 
 @Composable
-fun MenuScreen(/*navController: NavController*/) {
+fun MenuScreen() {
+    // var expanded by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,6 +68,32 @@ fun MenuScreen(/*navController: NavController*/) {
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp)
         ) {
+
+//            DropdownMenu(
+//                expanded = expanded,
+//                onDismissRequest = { expanded = false }
+//            ) {
+//                DropdownMenuItem(
+//                    text = { Text("Inicio") },
+//                    leadingIcon = { Icon(Icons.Default.Home, contentDescription = null) },
+//                    onClick = { /* Acción para navegar a Inicio */ }
+//                )
+//                DropdownMenuItem(
+//                    text = { Text("Perfil") },
+//                    leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) },
+//                    onClick = { /* Acción para ir a Perfil */ }
+//                )
+//                DropdownMenuItem(
+//                    text = { Text("Configuración") },
+//                    leadingIcon = { Icon(Icons.Default.Settings, contentDescription = null) },
+//                    onClick = { /* Acción para abrir Configuración */ }
+//                )
+//                DropdownMenuItem(
+//                    text = { Text("Cerrar sesión") },
+//                    leadingIcon = { Icon(Icons.Default.ExitToApp, contentDescription = null) },
+//                    onClick = { /* Acción para cerrar sesión */ }
+//                )
+//            }
 //            items(menuItems) { item ->
 //                // MenuItem(text = item.title, onClick = { navController.navigate(item.route) })
 //            }

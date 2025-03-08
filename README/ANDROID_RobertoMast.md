@@ -145,7 +145,16 @@ Mediante atajos se pueden crear las variables como recurso `strings`.
 ## 1. Respecto a `Kotlin`. El método `setContent`
 ### 1.1. Explicación `expresiones Lambda`
 ## 2. ¿Ques un `ViewGroup`?
-## ...
+## 3. ViewGroup `FrameLayout` - `Box`
+### 3.1. Vista
+### 3.2. Compose
+## 4. ViewGroup `LinearLayout` - `Column`|`Row`
+### 4.1. Vista
+### 4.2. Compose
+### 4.3. Realizar `ejercicio 1`
+## 5. ViewGroup `ConstrainLayout` - `ConstraintLayout`
+### 5.1. Vista
+### 5.2. Compose
 # _______________________________
 
 Vamos a ver como diseñar los interface tanto mediante vistas pero sobretodo con Compose.
@@ -272,10 +281,10 @@ Vamos a `File` --> `Proyect Structure` --> `Dependencies` --> `Add Library Depen
 Nombre del fichero `constraint_layout` y 'root element' ponerlo como `androidx.constraintlayout.widget.ConstraintLayout`.
 
 ### 5.1. Vista
-Ya visto en apuntes de la asignatura del grado con el readme `Android_Grado.md`
+Ya visto en apuntes de la asignatura del grado en el readme `Android_Grado.md`
 
 ### 5.2. Compose
 - El método `@Composable` y `Preview`.
 
-Asignarle `id` y `bias (sesgos)` y dimensión `0dp (que dependa del contraints)`.
+Asignarle `id`, `bias (sesgos)` y peso con dimensión `0dp (que dependa del contraints)`.
 

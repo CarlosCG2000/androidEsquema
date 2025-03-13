@@ -458,24 +458,25 @@ Ejecutamos y funciona perfectamente.
 
 Pero vemos que idnependientemente que se reciba o no los datos del `SavedStateHandle` la obtención de la variable del View Model se relazia exactamente igual en los observables (vistas compose que se subscriben al View Model).
 
-## 4. Otros componetes en la interfaz
-Creamos un Slider acorde a la variable del contador y que realize la misma función que los dos botones decrementar e incrementar.
+## 4. Otros componetes en la `interfaz`
+Creamos un `Slider` acorde a la variable del contador y que realize la misma función que los dos botones decrementar e incrementar.
 
-MIN 1:45:00
+En el `View Model` creamos un nuevo `método que modifique la variable de contador` y esa será la `operación` que realice el `Slider`.
+
+Entonces como `resultado` vemos que `independientemente del composable` (box, button, slider...) que se haga mutar a la `variable contador` del `View Model`, este se va a actualizar, `actualizando` además a todos los `composables` a los que esta `subcrito` dicha variable.
+
+## 5. Personalizar `View Model`
+Vamos a hacer ahora a personalizar View Model puede recibir otros parámetros.
 
 
 
-
-
-
-
-
+MIN 2:09:30
 
 ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
 
-#### MI RESUMEN
+# MI RESUMEN
 
-#### DUDAS
+# DUDAS
 - ¿Si ese dato (`contador`) solo lo usamos en la pantalla (función composable) no seria mejor dejarlo como un `Holder Observable` (`State` o `MutableState`) en vez de llevarlo a un `View Model`? ¿Lo hiciste solo de ejemplo para ver los `View Model`? ¿Cuando deberia de llevarse a un `View Model`?
 
 - ¿Una `única actividad` en toda la `aplicación`, o cuando deberia tener varias actividades?
@@ -483,6 +484,8 @@ ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUN
 - ¿Una `pantalla` tendra un `VM`, pero un `VM` podra tener `muchas pantallas` no?
 
 - ¿Pero entonces no es adecuado llamar a varios VMs en una misma pantalla? ¿Yo por ejemplo necesitos diferentes datos en  diferentes fuentes de datos `Personaje`, `Episodios`, `Citas`, yo tengo una pantalla que necesita todos los datos, no estaria bien llamarlos?
+
+# PUNTOS EXTRAS - CHAT GPT
 
 ```java
 // Con 'remember': mi variable transciende mi ciclo de vida de mi aplicación

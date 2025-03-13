@@ -30,6 +30,10 @@ class ContadorViewModel(val savedStateHandle: SavedStateHandle): ViewModel() {
         savedStateHandle[CONTADOR_KEY] = contador.value - 1
     }
 
+    fun updateContador(value:Int){
+        savedStateHandle[CONTADOR_KEY] = value
+    }
+
     companion object{
         const val CONTADOR_KEY = "es.upsa.mimo.contador.ui.screens.contador.ContadorViewModel.CONTADOR_KEY"
     }

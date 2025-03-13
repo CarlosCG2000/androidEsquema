@@ -1,10 +1,12 @@
 package es.upsa.mimo.contador.ui.screens.contador
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -36,6 +38,7 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
     // var contador = remember { mutableStateOf(0) } // remember: actualiza vista, añadir '.value'
     // var contador by remember { mutableStateOf(0) } // by: no hace falta ya el '.value'
     // var contador by rememberSaveable { mutableStateOf(0) } // rememberSaveable: almacena valor en bundle, transciende al ciclo de vida de la función
+
     val viewModel: ContadorViewModel = viewModel() // transciende al ciclo de vida de la actividad
     val contador by viewModel.contador.collectAsState() // llamamos a contador y lo convirtimos a State (sincrono en hilo principal, ya que estamos en una vista) y que en el ViewModel es StateFlow (asincrono en hilo secundario)
 
@@ -59,6 +62,12 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
             modifier = Modifier.layoutId("idDecrementButton")
 
         ) { Text(text = "-") }
+
+        Slider(modifier = Modifier.layoutId("idSlider"),
+                value = contador.toFloat(),
+                valueRange = 0f..255f,
+                onValueChange = { viewModel.updateContador(it.toInt()) }
+        )
     }
 }
 
@@ -66,8 +75,8 @@ fun ContadorScreenContraintSet(): ConstraintSet {
 
     return ConstraintSet(){
         // Creando referencias (ids)
-        val ( idBox, idIncrementButton, idDecrementButton )  = createRefsFor("idBox",
-        "idIncrementButton", "idDecrementButton")
+        val ( idBox, idIncrementButton, idDecrementButton, idSlider )  = createRefsFor("idBox",
+        "idIncrementButton", "idDecrementButton", "idSlider")
 
         // Creamos una cadena horizontal para los dos botones
         val idHorizontalChain = createHorizontalChain(idIncrementButton, idDecrementButton, chainStyle = ChainStyle.Spread)
@@ -95,6 +104,16 @@ fun ContadorScreenContraintSet(): ConstraintSet {
 
         constrain(idDecrementButton) {
             baseline.linkTo(idIncrementButton.baseline)
+        }
+
+        constrain(idSlider) {
+            top.linkTo(parent.top)
+            bottom.linkTo(parent.bottom)
+            start.linkTo(parent.start, 32.dp)
+            end.linkTo(parent.end, 32.dp)
+
+            width = Dimension.fillToConstraints
+
         }
 
     }

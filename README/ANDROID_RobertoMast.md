@@ -297,3 +297,47 @@ Resumen `ConstraintLayout` con Compose:
 
 Ya luego lo hago....
 
+
+
+# 3_CLASE `12/03/25`
+
+# __________ 0. Índice __________
+## 1.
+## ...
+# _______________________________
+
+Creamos un nuevo proyecto `03_ContadorApp`. En Compose (con Kotlin).
+Vamos a hacer una aplicacion simple, para entender varios conceptos. La aplicación tiene que tener este diseño.
+
+
+
+
+
+
+```java
+// Con 'remember': mi variable transciende mi ciclo de vida de mi aplicación
+// Esto es un 'holder' que permites que las vistas sean 'observables' respecto esta variable
+var contador by rememberSaveable { mutableStateof() } // con 'by' se crea un delegado, se crea un objeto con lo que definimos con un 'get' y 'set' (solo 'get' si se crea con un 'val')
+
+// El problema es que con el cambio de ciclo de vida (cuando giramos la pantalla por ejemplo) se reinicia la variable.
+// La solución el ciclo de vida guardar en el bundle para al restaurarse el ciclo de vida
+//Cambiamos 'remember' por 'rememberSaveable'
+
+//Datos locales a la pantalla
+// Datos de la fuente externas de la logica de mi aplicación es para lo que se utiliza el concepto de ViewModel
+
+// El ciclo de vida delview model transciende el ciclo de vida de mi actividad.
+// El VM no se ve adectado por los cambio de configuracion del telefono. Es el sitio dieal donde guardar el estado de la actividiad, los datos necesarios para las disitintas pantalla de la actividad.
+// Una actividad puede ter uno o N viewModels vinculados a la actividad cuando se necesite.
+// Lo normal es tener un VM por cada actividad y una actividad tiene muchos vistas (Composable).
+// rendremos un VM por pantalla el VM es el quien tiene lso emtodos que gestion el estado de la pantalla, si por ejempñplo procede de una fuente externa con un repositorio y queremos el estado de productos.
+
+//Ya no necesitamos remeber si lo ponemos en un VM porque como comentamos trasciende de los ajsutes del dispositos.
+
+// Vm puede recuperar informacion de un repositorio y de esta de una base de datos. Y hay esta el prblema cuando lo hago en una base de datos o paguina web esto es muy lenyto y se va a quedar bloqueada la interfaz. Si es superior a 5 segundos la aplicaicon falla,s egun android si se para mas de 5 seg se parara.
+```
+
+```java
+
+
+```

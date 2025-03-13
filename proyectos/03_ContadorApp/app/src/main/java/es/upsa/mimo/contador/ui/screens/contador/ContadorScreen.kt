@@ -39,7 +39,10 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
     // var contador by remember { mutableStateOf(0) } // by: no hace falta ya el '.value'
     // var contador by rememberSaveable { mutableStateOf(0) } // rememberSaveable: almacena valor en bundle, transciende al ciclo de vida de la función
 
-    val viewModel: ContadorViewModel = viewModel() // transciende al ciclo de vida de la actividad
+    // Tenemos que decir que factory queremos que utilice (ContadorViewModel.factory(77))
+    val viewModel: ContadorViewModel = viewModel(
+        factory = ContadorViewModel.factory(77)
+    ) // transciende al ciclo de vida de la actividad
     val contador by viewModel.contador.collectAsState() // llamamos a contador y lo convirtimos a State (sincrono en hilo principal, ya que estamos en una vista) y que en el ViewModel es StateFlow (asincrono en hilo secundario)
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()
@@ -47,7 +50,7 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
                      constraintSet = ContadorScreenContraintSet()
     ){
         Box(modifier = Modifier.layoutId("idBox")
-                                .background(color = Color.Black, shape = CircleShape),
+                                .background(color = Color(red = contador, green = 0x00, blue = 0x00, alpha = 0xFF), shape = CircleShape),
             contentAlignment = Alignment.Center
 
         ){ Text(text = "${contador}",

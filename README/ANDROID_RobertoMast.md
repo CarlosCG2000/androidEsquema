@@ -302,8 +302,15 @@ Ya luego lo hago....
 # 3_CLASE `12/03/25`
 
 # __________ 0. Índice __________
-## 1.
-## ...
+## 1. Interfaz
+## 2. Holder Observable
+## 3. View Model
+### 3.1 Fichero de View Model: `ContadorViewModel.kt`
+### 3.2 `Holder Observable` tipo `StateFlow` y `MutableStateFlow`
+### 3.3 `.collectAsState()` - Convertir en `Holder Observable` (tipo `State`)
+### 3.4 Objeto `SavedStateHandle`
+## 4. Otros componetes en la `interfaz`
+## 5. Personalizar `View Model`
 # _______________________________
 
 Creamos un nuevo proyecto `03_ContadorApp`. En Compose (con Kotlin).
@@ -467,14 +474,24 @@ Entonces como `resultado` vemos que `independientemente del composable` (box, bu
 
 ## 5. Personalizar `View Model`
 Vamos a hacer ahora a personalizar View Model puede recibir otros parámetros.
+Es decir, tenemos que modificar nuestro constructor para que pueda recibir parámetros.
 
+- Vamos a poner que el valor inicial de la variable contador no sea 0 si no uno que nosotros especifiquemos.
+- Si un View model recivbe parametros que no estan predeterminados como el `SavedStateHandle` necesaria mente tenemos que crearnos un `Factory` a través del que  vamos a poder crear estos objetos `View Model`.
 
+Los `Factory` se definen a través de atributos estáticos o métodos estáticos (dentro de `companion object`).
 
-MIN 2:09:30
+- En la clase del View Model se añade el parámetro que quieres añadir.
+- En una función estática (` dentro del companion object`) se define el `Factory` el cuál en su método de creación tendra que llamar a través de los parámetros que se le pase al `View Model `con sus parámetros definidos.
+- Luego en las `vistas observables (Compose)` se le pasará como parámetro `factory` el método `factory`.
 
-ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
+Por tanto, nosotros cuando definimos un `View Model` podemos personalizar los `parámetros` que vamos a recibir en nuestro `View Model`. Para ello a través de una objeto estático tenemos que definir `un Factory`, es decir un objeto que defina como vamos a crear los `View Model` donde se puedan definir `parámetros` del constructor del View Model.
+
+Más adelante cuando veamos `la inyección de dependecias` veremos que al `constructor del View Model` se le pueden `inyectar los datos`.
+
 
 # MI RESUMEN
+ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
 
 # DUDAS
 - ¿Si ese dato (`contador`) solo lo usamos en la pantalla (función composable) no seria mejor dejarlo como un `Holder Observable` (`State` o `MutableState`) en vez de llevarlo a un `View Model`? ¿Lo hiciste solo de ejemplo para ver los `View Model`? ¿Cuando deberia de llevarse a un `View Model`?

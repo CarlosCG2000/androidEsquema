@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +37,7 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
     // var contador by remember { mutableStateOf(0) } // by: no hace falta ya el '.value'
     // var contador by rememberSaveable { mutableStateOf(0) } // rememberSaveable: almacena valor en bundle, transciende al ciclo de vida de la función
     val viewModel: ContadorViewModel = viewModel() // transciende al ciclo de vida de la actividad
+    val contador by viewModel.contador.collectAsState() // llamamos a contador y lo convirtimos a State (sincrono en hilo principal, ya que estamos en una vista) y que en el ViewModel es StateFlow (asincrono en hilo secundario)
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()
                                         .background(Color.White),
@@ -45,7 +47,7 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
                                 .background(color = Color.Black, shape = CircleShape),
             contentAlignment = Alignment.Center
 
-        ){ Text(text = "${viewModel.contador.value}",
+        ){ Text(text = "${contador}",
                 color = Color.White) }
 
         Button(onClick = { viewModel.increment() },

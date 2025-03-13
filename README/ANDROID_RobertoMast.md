@@ -346,10 +346,10 @@ El `holder` es `observable` en el sentido de que puede haber otros `objetos`, qu
 
 * Hay distintos `tipos` de `Holder Observable`.
 
-### 2.1 State
+### 2.1 `Holder Observable` tipo State - `State`
 Compose requiere que el `Holder Observable` sea un objeto `State`. Un objeto `State` seria un `observable no mutable`. Imaginar como si `State` fuese una clase abstracta que no tiene el método `set` para poder cambiar el contenido de ese `observable`.
 
-### 2.2 State - MutableState
+### 2.2 `Holder Observable` tipo State - `MutableState`
 Este `Holder Observable` extiende de la clase `State` y si tiene el método para poder modificar le objeto contenido del `Holder`.
 
 Entonces si nuestra variable de contador la pasamos a un tipo `MutableState` ya que se debe de poder modificar el contador. El problema es que sigue siendo una variable local y a todos los efectos se destruira después de la ejecución de la función.
@@ -415,11 +415,53 @@ Si nosotros ejecutamos funciona perfectamente.
 
 Hay que tener en cuenta que el View Model puede recupera rla información de un repositorio. Y el repositorio a su vez puede obtener información de una funete de datos (BD, de una API, Json, etc.)
 
-Y hay esta el problema, el problema es que cuando yo recupero la información de una fuente de datos o servicio web esa operacion es muy lenta y eso implica que le hilo que ejecute esa aplicación se a quedr bloqueado a la esspera de rcibir la respueste de la fiente de datos o servicio web.
+### 3.2 `Holder Observable` tipo `StateFlow` y `MutableStateFlow`
+Y hay esta el problema, el problema es que cuando yo recupero la información de una fuente de datos o servicio web esa operacion es muy lenta y eso implica que le hilo que ejecute esa aplicación se a quedr bloqueado a la esspera de recibir la respueste de la fiente de datos o servicio web.
 
 Que se quede bloqueado es un problema ya que si se queda más d e5 segundos la aplicación falla, segun Andoriod si el hilo principal queda bloqueado durante 5 segundos se entiende que la aplicación no funciona y se rompe.
 
 Por lo tanto todos los datos que se extraigan del repositorio no deben de ejecutarse en el hilo principal ya que se encuerga solo dle interfaz de usuario. Si es otor hilo el que se encarga de la gestión de los datos a todos los efectos habra un hilo que me modfique los datos del View Model y esa modificación, sera `asincrona` con respecto al hilo principal que muestra los datos en la pantalla.
+
+Por lo cual el `Holder Observable` que tenemos que no puede ser ni `State` ni `MutableState` sino `MutableStateFlow`.
+
+Ya que el `Holder State` (`State` o `MutableState`) es un `Holder` sincrono. Por lo que quien modifica el valor del holder es el mismo que notifica a los observadores y por tanto es el mismo hilo que ejecuta el código del observador. Ese hilo es el principal.
+
+Por lo tanto el hilo que notifique al Holder no tiene que ser el mismo hilo que notifique a los composables. Por lo tanto el hilo del Holder no tiene que ser sincrono sino asincrono (no bloqueante).
+
+En el View Model se crearan dos variablesde contador:
+- `_contador`; versión privada y mutable con la que se realizaran las operaciones en el View Model.
+- `contador`: versión publica e inmutable que recibira el valor de `_contador` y solo servira para proporcionar a los observadores que se puedan subcribir a él y notificarlos cuando cambia el estado, es decir cuando cambie `_contador`.
+
+### 3.3 `.collectAsState()` - Convertir en `Holder Observable` (tipo `State`)
+* Volvemos la función Compose (pantalla).
+Los `Composables` necesitan si o si `Holder sincrono` (ya que son `interfaces` y estas deben estar en el  `hilo principal`). Es decir necesitamos que se convierta la variables del View Model a `Holder Observable` tipo `State`y esos se realiza con `.collectAsState()`.
+
+Cuando la variable contador cambie de valor (en el View Model), automaticamente cambiara mi variable contador (del Compose) y se actualizara dicha vista. Ya que se habra creado un observador para el State de la variable.
+
+Ejecutamos y funciona perfectamente.
+
+### 3.4 Objeto `SavedStateHandle`
+Seguimos con el View Model.
+Deciamos que el View Model tranciende del ciclo de vida de la actividad resistiendo a los cambios de la configuración de esta.
+
+¿Pero que pasa si el proceso de la actividad lo mata el sistema operativo poruqe necesita mas recursos asumiendo que esta la actividad en Stoppted (no visible)? Vemos que el View Model si transciende el ciclo de vida de las actividades en tanto que se reseteen los cambios de configuración pero si la actividad se recree como consecuencia de que ha sido el sistema operativo quine la ha matado, hay se genera un nuevo View Model perdiendo todo los datos de este e inicializandose por defecto estos.
+
+Entonces necesitamos en el View Model salvar el estado de sus variables para que se almacenen en el bundle para el método de ciclo de vida del `save()`.
+
+Para ello en la clase del View Model como parámetro hay que pasarle un objeto `SavedStateHandle`.
+
+Y ahora solo se declara `una variable contador` (con `StateFlow`: hilo secundario, inmutable) y se recoge el `valor del bundle` que es el que se modifica y se pasa a las vistas a la vez.
+
+Ejecutamos y funciona perfectamente.
+
+* Entonces podemos tenerlos datos de nuestro View Model definidos o bien a través de un `_contador` con `MutableStateFlow` o a través del `SavedStateHandle` todo a va en función de de la experiencia que queremos que tenga el usuario en nuestra aplicación. Si queremos que al final el usario sigua viendo el mismo estado de la actividad cuando nosotros sabemos que el sistema operativo puede matar esa actividad.
+
+Pero vemos que idnependientemente que se reciba o no los datos del `SavedStateHandle` la obtención de la variable del View Model se relazia exactamente igual en los observables (vistas compose que se subscriben al View Model).
+
+### 4. Otros componetes en la interfaz
+Creamos un Slider acorde a la variable del contador y que realize la misma función que los dos botones decrementar e incrementar.
+
+MIN 1:45:00
 
 
 

@@ -7,6 +7,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +29,11 @@ import androidx.constraintlayout.compose.Dimension
 @Composable
 fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúsculas.
 
-    var contador = 0
+    // var contador = 0
+    // var contador = mutableStateOf(0)
+    //var contador = remember { mutableStateOf(0) } // añadir '.value'
+    // var contador by remember { mutableStateOf(0) }
+    var contador by rememberSaveable { mutableStateOf(0) } // almacena valor en bundle
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()
                                         .background(Color.White),
@@ -34,7 +43,7 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
                                 .background(color = Color.Black, shape = CircleShape),
             contentAlignment = Alignment.Center
 
-        ){ Text(text = "$contador",
+        ){ Text(text = "${contador}",
                 color = Color.White) }
 
         Button(onClick = { contador += 1 },

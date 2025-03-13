@@ -313,6 +313,7 @@ IMAGEN [1_interfazContador]
 
 Creamos un paquete `screens` dentro otro paquete `contador` y dentro el fichero `ContadorScreen.kt`.
 
+## 1. Interfaz
 En `ContadorScreen.kt`, primero dibujamos la interfaz.
 
 Añadimos la libreria de ConstraintLayout: `androidx.constraintlayout` y elegimos `constraintlayout-compose`.
@@ -323,6 +324,7 @@ Lo vamos a `modular` invocando a una función que lo que nos devuelva sea el `co
 - Para `dimensionar` un cuadrado o circulo `perfecto`: damos una dimensión y luego un `ratio` para la otra.
 - Para `alinear` los botones: creamos `una cadena horizontal` con los dos botones, viene a ser el sustituto de `Column` y `Row` en `Constraints`. Esta cadena puede tener sus propios `Constraints`.
 
+## 2. Holder Observable
 * ¿Que queremos mostrar en el Box y que queremos lógica de acción a través de los botones?
 La idea es que al pulsar el boton de incrementación (+) se sume un número en el Box y viceversa para el boton de decrementenar (-) se reste un número en el Box.
 
@@ -342,12 +344,49 @@ El `holder` es `observable` en el sentido de que puede haber otros `objetos`, qu
 
 `¿Compose por que lo necesita?` Lo necesita porque cuando `cambie el estado del objeto` automaticamente va a `recomponer` todos los `vistas` (Composables) en donde se utilice ese `Holder`. Los distintos `elementos` se convertiran en `observadores` si ese holder reaccionarian volviendo a pintar todo el composable siempre que el holder cambie el valor.
 
-Hay distintos `tipos` de `Holder Observables`, uno es el `State`
+* Hay distintos `tipos` de `Holder Observable`.
 
-MIN 43:00
+### 2.1 State
+Compose requiere que el `Holder Observable` sea un objeto `State`. Un objeto `State` seria un `observable no mutable`. Imaginar como si `State` fuese una clase abstracta que no tiene el método `set` para poder cambiar el contenido de ese `observable`.
+
+### 2.2 State - MutableState
+Este `Holder Observable` extiende de la clase `State` y si tiene el método para poder modificar le objeto contenido del `Holder`.
+
+Entonces si nuestra variable de contador la pasamos a un tipo `MutableState` ya que se debe de poder modificar el contador. El problema es que sigue siendo una variable local y a todos los efectos se destruira después de la ejecución de la función.
+
+### 2.3 Remember
+Deberiamos conseguir que las variables perduren la ejecución de la función (Compose) y eso se consigue mediante `remember`.
+
+`Remember` es una función que recibe como parámetro una lambda que lo que permite que el objeto `mutableState` contenido en la lambda extedienda no se destruya al finalizar el método sino que persista fuera del `ciclo de vida` de la función.
+
+Si la variable (objeto) `mutableState` extiende del ciclo de vida, se puede cambiar el valor de la variable (contador). Para poder acceder al valor ahora se deberia de realizar a través de su `.value`.
+
+### 2.3.1 By
+La variable con `remember` se puede definir a través de hacer un `=` o a través de `by`.
+Si la definimos a través de `by` lo que sucede es que lo que se ponga a la derecha (el `MutableState`) se va a convertir en un `delegado`. Lo que me va a devolver es un `objeto`, donde ese objeto va a contener las propiedades `get` y `set` en función de si lo he definido como `val` o `var`.
+
+Gracias a ello la `instanciación` de el objeto `MutableState` se `retrasa` lo máximo posible, es decir no se va a instanciar hasta que en la secuencia de mi función se llame por primera vez a la variable.
+
+Ahora para llamar al valor no se necesita `value` porque como he comentado ya tiene implicitamente el `get`y `set`.
+
+Si ahora ejecutamos vemos que ahora mi variable por ser `remember` trasciende del ciclo de vida de la función y se actualice el valor de la variable contador por pantalla gracias al `Holder Observable` de tipo `MutableState`.
+
+* ¿Pero que sucede si cambia la pantalla de rotación? El `ciclo de vida` de la aplicación se `reinicia` y la variable igualmente se reinicia y el contador vuelve a valer el `valor inicial`. Ya que cunado cambia la configuración se mata a la actividad y se reinicia el ciclo de vida.
+
+¿Como podiamos restaurar los valores del ciclo de vida? A traves del método `onSave()`.
+
+### 2.4 RememberSaveable
+`RememberSaveable` a diferencia de `remember` que recuerda el dato entre recomposiciones y sin encambio `rememberSaveable` realiza lo mismo pero al final `almacena` el valor en el `bundle` para el ciclo de vida. Y por lo tanto aunque haya reconfiguración (reocmposición) posteriormente segun esta programado Compose y su Actividad recuperan el valor de ese `bundle` y no necesita inicializar la variable con el valor por defecto.
+
+Ahora si volvemos a ejecutar por mucho que cambiemos de posición el dispositivo al guardar el ultimo valor en el bundle no pasa nada que se mate la actividad y se reinicie el ciclo de vida ya que a través del bundle recuperará el valor ya que ha sido almacenado.
+
+## 3. View Model
+* Generalmente definiremos como variables de tipo `MutableState` datos que sean `locales a la pantalla` y para aquellos otros datos que no sean locales a la pantalla sino que r`epresenten el estado` de mi pantalla de forma que ese estado pueda proceder de una `fuente externa`, como una BD, servicio web, etc de la lógica de mi aplicación en todos los eventos, es para lo que se define el concepto de `View Model`.
+
+El `View Model`, es un objeto. El ciclo de vida del `View Model` trasciende el ciclo de vida de una actividad. Eso significa que si yo giro el telefono y originalmente mi actividad tenia un View Model,
+
 
 (Ver en ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES))
-
 
 ```java
 // Con 'remember': mi variable transciende mi ciclo de vida de mi aplicación

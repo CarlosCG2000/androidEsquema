@@ -24,16 +24,18 @@ import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúsculas.
 
     // var contador = 0
-    // var contador = mutableStateOf(0)
-    //var contador = remember { mutableStateOf(0) } // añadir '.value'
-    // var contador by remember { mutableStateOf(0) }
-    var contador by rememberSaveable { mutableStateOf(0) } // almacena valor en bundle
+    // var contador = mutableStateOf(0) // mutableStateOf(): no cambia respecto a la anterior
+    // var contador = remember { mutableStateOf(0) } // remember: actualiza vista, añadir '.value'
+    // var contador by remember { mutableStateOf(0) } // by: no hace falta ya el '.value'
+    // var contador by rememberSaveable { mutableStateOf(0) } // rememberSaveable: almacena valor en bundle, transciende al ciclo de vida de la función
+    val viewModel: ContadorViewModel = viewModel() // transciende al ciclo de vida de la actividad
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()
                                         .background(Color.White),
@@ -43,15 +45,15 @@ fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúscul
                                 .background(color = Color.Black, shape = CircleShape),
             contentAlignment = Alignment.Center
 
-        ){ Text(text = "${contador}",
+        ){ Text(text = "${viewModel.contador.value}",
                 color = Color.White) }
 
-        Button(onClick = { contador += 1 },
+        Button(onClick = { viewModel.increment() },
                modifier = Modifier.layoutId("idIncrementButton")
 
             ) { Text(text = "+") }
 
-        Button(onClick = { contador -= 1 },
+        Button(onClick = { viewModel.decrement() },
             modifier = Modifier.layoutId("idDecrementButton")
 
         ) { Text(text = "-") }

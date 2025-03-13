@@ -383,10 +383,58 @@ Ahora si volvemos a ejecutar por mucho que cambiemos de posición el dispositivo
 ## 3. View Model
 * Generalmente definiremos como variables de tipo `MutableState` datos que sean `locales a la pantalla` y para aquellos otros datos que no sean locales a la pantalla sino que r`epresenten el estado` de mi pantalla de forma que ese estado pueda proceder de una `fuente externa`, como una BD, servicio web, etc de la lógica de mi aplicación en todos los eventos, es para lo que se define el concepto de `View Model`.
 
-El `View Model`, es un objeto. El ciclo de vida del `View Model` trasciende el ciclo de vida de una actividad. Eso significa que si yo giro el telefono y originalmente mi actividad tenia un View Model,
+El `View Model`, es un objeto. El ciclo de vida del `View Model` trasciende el ciclo de vida de una actividad. Eso significa que si yo giro el teléfono y originalmente mi actividad llamaba a un View Model,
+al girar el teléfono esa actividad muere y se crea una nueva actividad que va a recuperar el View Model y va a ser el mismo objeto View Model, porque el View Model  no se ve afectado por los cambios de configuración del teléfono. Al no verse afecto el View Model es el objeto ideal donde nosotros podamos almacenar el estado de la actividad, lo que es lo mismo los datos que necesita la actividad para mostrar, o lo que es lo mismo los datos que son necesarios para las distintas pantallas de la actividad.
+
+Anteriormente `una actividad` siempre tenia `un View Model`. Una actividad en verdad puede tener `un` View Model o `n` `View Models`. Se peude tener tantos View Model vinculados a la activdad como se necesiten.  Y estariamos en las misma si yo cambio la configuración del telefono, la nueva actividad recuperaria los mismos objetos View Model.
+
+Generalmente `ahora` las aplicaciones tienen una `única actividad` y `muchas pantallas` (funciones Composables).
+
+Manteniendo el mismo concepto tendremos ahora un `View Model` por `pantalla` (función Composable). Ya que el `View Model` tendra el `estado de la pantalla`. El `View Model` tendra `los métodos` que gestionen el estado del pantalla. Quiero eso decir, que si el `estado de la pantalla` procede de una `fuente externa`, y nosotros tenemos un `repositorio` y queremos el `estado de productos`. Mi `View Model` tendra que tener `un método` que sera invocado en `mi pantalla` que sea que a través de `mi repositorio` mande al objeto desde la `fuente de datos` correspondiente que me proporcione `los datos`. Y la modificación de los datos desde el `View Model` sera notificada a las distintas vistas `Composables`.
+
+Esquema: `Fuente de datos` -> `Repositorio` -> `View Model` -> `Pantalla (Compose)` -> `Actividad`
+
+IMAGEN [2_cicloApp]
+
+En nuestra aplicación del contador.
+La variable `contador` la puedo definir como `variable local` un `Holder Observable` (`State` o `MutableState`) de mi `pantalla` (función `Composable`) o me puedo crear un `View Model` y hacer que el `View Model` sea el que contenga mi `variable contador`.
+
+Generalmente cuando definamos una pantalla tendremos una paquete para pantallas y cada pantalla se dividira con su View Model. Creamos dentro del paquete `screens/contador` donde ya se encuemtra la pantalla `ContadorScreen.kt` nuestro View Model `ContadorViewModel.kt`.
+
+### 3.1 Fichero de View Model: `ContadorViewModel.kt`
+- Extiende siempre de `ViewModel()`
+- La variable contador sera un `Holder Observable` de tipo `MutableState` pero ya no necesita ser `remember` porque el `View Model` transciende directamente del ciclo de vida de la actividad, por lo tanto tambien de las pantallas (funciones Composable) donde se encuentre.
+
+* Volvemos la función Compose (pantalla).
+Añadimos la dependencia: `androidx.lifecycle` llamada `lifecycle-viewmodel-compose`. Descartamos versiones `alpha` coger la última que no sea de este tipo.
+- Existe una función `ViewModel()` que seria la que recuperase el viewModel de `ContadorViewModel.kt` de la actividad donde se muestra el composable.
+
+Ahora no estaria bien que las `operaciones de la variable` que se encuentran en el `View Model` se realizasen en los botones de la `pantalla`. Si no que dichas operaciones se tiene que hacer dentro del `View Model` a través de funciones y luego ya en el composable (pantalla) se llama a dichas `funciones` a través del `View Model`.
+
+Si nosotros ejecutamos funciona perfectamente.
+
+Hay que tener en cuenta que el View Model puede recupera rla información de un repositorio. Y el repositorio a su vez puede obtener información de una funete de datos (BD, de una API, Json, etc.)
+
+Y hay esta el problema, el problema es que cuando yo recupero la información de una fuente de datos o servicio web esa operacion es muy lenta y eso implica que le hilo que ejecute esa aplicación se a quedr bloqueado a la esspera de rcibir la respueste de la fiente de datos o servicio web.
+
+Que se quede bloqueado es un problema ya que si se queda más d e5 segundos la aplicación falla, segun Andoriod si el hilo principal queda bloqueado durante 5 segundos se entiende que la aplicación no funciona y se rompe.
+
+Por lo tanto todos los datos que se extraigan del repositorio no deben de ejecutarse en el hilo principal ya que se encuerga solo dle interfaz de usuario. Si es otor hilo el que se encarga de la gestión de los datos a todos los efectos habra un hilo que me modfique los datos del View Model y esa modificación, sera `asincrona` con respecto al hilo principal que muestra los datos en la pantalla.
 
 
-(Ver en ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES))
+
+ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
+
+#### MI RESUMEN
+
+#### DUDAS
+- ¿Si ese dato (`contador`) solo lo usamos en la pantalla (función composable) no seria mejor dejarlo como un `Holder Observable` (`State` o `MutableState`) en vez de llevarlo a un `View Model`? ¿Lo hiciste solo de ejemplo para ver los `View Model`? ¿Cuando deberia de llevarse a un `View Model`?
+
+- ¿Una `única actividad` en toda la `aplicación`, o cuando deberia tener varias actividades?
+
+- ¿Una `pantalla` tendra un `VM`, pero un `VM` podra tener `muchas pantallas` no?
+
+- ¿Pero entonces no es adecuado llamar a varios VMs en una misma pantalla? ¿Yo por ejemplo necesitos diferentes datos en  diferentes fuentes de datos `Personaje`, `Episodios`, `Citas`, yo tengo una pantalla que necesita todos los datos, no estaria bien llamarlos?
 
 ```java
 // Con 'remember': mi variable transciende mi ciclo de vida de mi aplicación

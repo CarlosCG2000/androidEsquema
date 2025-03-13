@@ -29,7 +29,6 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-
 @Composable
 fun ContadorScreen() { // Con Compose las funciones empiezan con letra mayúsculas.
 

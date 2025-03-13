@@ -311,6 +311,9 @@ Ya luego lo hago....
 ### 3.4 Objeto `SavedStateHandle`
 ## 4. Otros componetes en la `interfaz`
 ## 5. `Factory` - Personalizar `View Model`
+## 6. Dudas
+### 6.1 Profesor
+### 6.2 Chat GPT
 # _______________________________
 
 Creamos un nuevo proyecto `03_ContadorApp`. En Compose (con Kotlin).
@@ -490,10 +493,13 @@ Por tanto, nosotros cuando definimos un `View Model` podemos personalizar los `p
 Más adelante cuando veamos `la inyección de dependecias` veremos que al `constructor del View Model` se le pueden `inyectar los datos`.
 
 
-# MI RESUMEN
+
 ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
 
-# DUDAS
+## 6. Dudas
+
+### 6.1 Profesor
+
 - ¿Si ese dato (`contador`) solo lo usamos en la pantalla (función composable) no seria mejor dejarlo como un `Holder Observable` (`State` o `MutableState`) en vez de llevarlo a un `View Model`? ¿Lo hiciste solo de ejemplo para ver los `View Model`? ¿Cuando deberia de llevarse a un `View Model`?
 
 - ¿Una `única actividad` en toda la `aplicación`, o cuando deberia tener varias actividades?
@@ -502,4 +508,148 @@ ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUN
 
 - ¿Pero entonces no es adecuado llamar a varios VMs en una misma pantalla? ¿Yo por ejemplo necesitos diferentes datos en  diferentes fuentes de datos `Personaje`, `Episodios`, `Citas`, yo tengo una pantalla que necesita todos los datos, no estaria bien llamarlos?
 
-# PUNTOS EXTRAS - CHAT GPT
+### 6.2 Chat GPT
+
+#### QUE TIPOS DE HOLDER OBSERVABLES TIENE Y SUS FUNCIONALIDADES EN ANDROID Y TAMBIEN COMO ES EN IOS
+
+🔹 Android (Jetpack Compose)
+En Jetpack Compose, los datos observables pueden almacenarse en diferentes holders según el alcance y persistencia que se necesite:
+
+1. remember + mutableStateOf (State<T>)
+• Se usa cuando el estado no necesita persistir más allá de la recomposición de una sola pantalla.
+```java
+@Composable
+fun Counter() {
+    var count by remember { mutableStateOf(0) }
+    Button(onClick = { count++ }) {
+        Text("Count: $count")
+    }
+}
+```
+
+2. rememberSaveable (State<T>)
+• Similar a remember, pero persiste en cambios de configuración (como rotación de pantalla).
+```java
+var count by rememberSaveable { mutableStateOf(0) }
+```
+
+3. LiveData o MutableStateFlow en ViewModel
+• Cuando el estado necesita persistir más allá del ciclo de vida de la pantalla (sobrevive a recomposiciones y cambios de configuración).
+```java
+class MyViewModel : ViewModel() {
+    private val _count = MutableStateFlow(0)
+    val count: StateFlow<Int> = _count
+
+    fun increment() {
+        _count.value++
+    }
+}
+```
+
+4.	remember { viewModel<MyViewModel>() }
+```java
+val viewModel: MyViewModel = viewModel()
+val count by viewModel.count.collectAsState()
+```
+
+🔹 iOS (SwiftUI)
+SwiftUI maneja los estados observables con distintos wrappers:
+1. @State (Local)
+• Equivalente a remember { mutableStateOf(...) } en Compose.
+• Se usa cuando solo la vista actual lo necesita.
+```swift
+struct CounterView: View {
+    @State private var count = 0
+    var body: some View {
+        Button("Count: \(count)") {
+            count += 1
+        }
+    }
+}
+```
+
+2. @StateObject (ViewModel)
+• Se usa cuando el estado necesita persistir fuera de la vista.
+• Similar a usar viewModel<MyViewModel>() en Jetpack Compose.
+```swift
+class CounterViewModel: ObservableObject {
+    @Published var count = 0
+}
+
+struct CounterView: View {
+    @StateObject var viewModel = CounterViewModel()
+    var body: some View {
+        Button("Count: \(viewModel.count)") {
+            viewModel.count += 1
+        }
+    }
+}
+```
+3. @ObservedObject (Compartido entre vistas)
+• Similar a remember { viewModel() } en Jetpack Compose cuando se pasa un ViewModel entre vistas.
+```swift
+struct CounterView: View {
+    @ObservedObject var viewModel: CounterViewModel
+    var body: some View {
+        Button("Count: \(viewModel.count)") {
+            viewModel.count += 1
+        }
+    }
+}
+```
+
+#### ¿Por qué se necesita un Factory en un ViewModel? ❌❌
+Por defecto, el ViewModelProvider solo puede instanciar un ViewModel con un constructor vacío. Si tu ViewModel necesita parámetros (por ejemplo, un repositorio), necesitas un Factory para pasarle esos valores.
+
+- Entonces sirve porsi tenemos un repostiorio en produccion y uno en test o algo asi?
+
+
+🧐 📌 Dudas sobre Android y Jetpack Compose
+
+#### Que diferencias hay entre el VM en Android (Kotlin + Compose) y iOS (SwiftUI) ❌❌
+
+#### 1. ¿Si el dato (contador) solo se usa en la pantalla (Composable), es mejor un State en vez de ViewModel?
+
+✅ Sí, si el dato solo es relevante para la pantalla actual y no se necesita compartir con otras, usa remember o rememberSaveable.
+
+❌ No, si el dato necesita persistir entre recomposiciones y cambios de configuración y/o debe ser compartido entre varias pantallas, usa ViewModel.
+
+💡 Ejemplo:
+• @State en SwiftUI o remember en Compose si el contador solo afecta a un Button.
+• ViewModel si el contador se usa en varias pantallas.
+
+#### 2. ¿Es mejor una única actividad en toda la aplicación o varias?
+
+📌 Depende del caso:
+✅ Una única Activity con Navigation Compose → Recomendado para arquitecturas modernas.
+	•	Permite manejar pantallas con Composable sin necesidad de crear múltiples Activity.
+	•	Mejora el rendimiento y evita problemas de ciclo de vida.
+
+❌ Varias Activity → Se usa en casos donde se necesita:
+	•	Separar lógicas muy distintas (ej. LoginActivity y MainActivity).
+	•	Interacción con sistemas externos (ej. WebViewActivity).
+
+💡 Conclusión: La mejor práctica actual es tener una sola Activity y manejar la navegación con Navigation Compose.
+
+#### 3. ¿Cada pantalla debe tener un ViewModel? ¿Un ViewModel puede manejar varias pantallas?
+✅ Sí, cada pantalla suele tener su ViewModel para mantener separación de responsabilidades.
+✅ Sí, un ViewModel puede manejar varias pantallas si tienen datos comunes (ej. un ViewModel de autenticación).
+❌ No es recomendable usar un ViewModel para muchas pantallas si manejan datos distintos.
+
+#### 4. ¿Puedo llamar a varios ViewModel en una misma pantalla?
+✅ Sí, si cada ViewModel tiene una responsabilidad diferente.
+💡 No abuses de esto. Si un ViewModel ya maneja datos relacionados, no crees otro innecesario.
+
+✅ Conclusión general
+• Si el dato solo lo usa una pantalla, usa State o remember.
+• Si debe persistir recomposiciones, usa rememberSaveable.
+• Si el dato es compartido entre pantallas o debe sobrevivir cambios de configuración, usa ViewModel.
+• Una sola Activity con Navigation Compose es lo recomendado.
+• Puedes usar múltiples ViewModel en una pantalla, pero no abuses de ellos.
+
+🔹 Android (Jetpack Compose) y iOS (SwiftUI) tienen principios similares, pero cada uno usa sus propias herramientas (StateFlow, LiveData en Android y @StateObject, @ObservedObject en SwiftUI). 🚀
+
+
+
+
+

@@ -342,9 +342,11 @@ El `holder` es `observable` en el sentido de que puede haber otros `objetos`, qu
 
 `¿Compose por que lo necesita?` Lo necesita porque cuando `cambie el estado del objeto` automaticamente va a `recomponer` todos los `vistas` (Composables) en donde se utilice ese `Holder`. Los distintos `elementos` se convertiran en `observadores` si ese holder reaccionarian volviendo a pintar todo el composable siempre que el holder cambie el valor.
 
-Hay distintos `tipos` de `Holder Observables`,
+Hay distintos `tipos` de `Holder Observables`, uno es el `State`
 
 MIN 43:00
+
+(Ver en ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES))
 
 
 ```java

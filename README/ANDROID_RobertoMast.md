@@ -309,9 +309,42 @@ Ya luego lo hago....
 Creamos un nuevo proyecto `03_ContadorApp`. En Compose (con Kotlin).
 Vamos a hacer una aplicacion simple, para entender varios conceptos. La aplicación tiene que tener este diseño.
 
+IMAGEN [1_interfazContador]
 
+Creamos un paquete `screens` dentro otro paquete `contador` y dentro el fichero `ContadorScreen.kt`.
 
+En `ContadorScreen.kt`, primero dibujamos la interfaz.
 
+Añadimos la libreria de ConstraintLayout: `androidx.constraintlayout` y elegimos `constraintlayout-compose`.
+
+Lo vamos a `modular` invocando a una función que lo que nos devuelva sea el `conjunto de restricciones` y luego aplicamos esas restricciones en nuestro `ConstraintLayout` que solo contendra la definición de que `elementos graficos va a tener` quedando mas limpio al separar sus restricciones.
+
+- Para `posicionar` un elemento por un `porcentaje`: posicionamos centrado y le damos un `sesgo`.
+- Para `dimensionar` un cuadrado o circulo `perfecto`: damos una dimensión y luego un `ratio` para la otra.
+- Para `alinear` los botones: creamos `una cadena horizontal` con los dos botones, viene a ser el sustituto de `Column` y `Row` en `Constraints`. Esta cadena puede tener sus propios `Constraints`.
+
+* ¿Que queremos mostrar en el Box y que queremos lógica de acción a través de los botones?
+La idea es que al pulsar el boton de incrementación (+) se sume un número en el Box y viceversa para el boton de decrementenar (-) se reste un número en el Box.
+
+Lo primero que necesitariamos es `una variable de tipo entero` que lo que muestre el dato en el Box y yo pueda incrementarlo y decrementarlo las acciones de los botones.
+
+¿Que pasa? `No hace nada`, por mucho que pulsemos los botones no se incrementa o decrementa la variable.
+
+A todos los efectos la vista (Composable) es una función y la variable es una variable local de la función por lo que una vez ejecutada la aplicación las variables locales se destruyen.
+
+¿Como gestionamos el `estado de las variables` de la pantalla? Aqui entra el concepto de que las vistas (Compose) necesitan `Holder Observables`.
+
+¿Un `Holder` que es? Es un `objeto (o variable)` cuyo único proposito es contener otro objeto. Normalmente estos `Holder` son genericos yo me defino uno que pueda generar un `String`, `Int`, `Producto`.
+
+¿Que quiere decir que sea `observable`? Quiere decir que los `Holder` se van a poder subcribir `observadores`, de forma que si el `Holder muta` (cambio su valor), el `Holder` notificará automaticamente a todos sus `observadores` del cambio que se a producido enviandoles el nuevo dato. Los observadores ahora con ese nuevo dato podran realizar lo que necesiten con él.
+
+El `holder` es `observable` en el sentido de que puede haber otros `objetos`, que se `subcriban a él`, esos objetos se denominan `observadores`. Y los observasdores va a recibir esos `nuevos datos` que contiene el `Holder`. Esto quiere decir, que puede haber `otros objetos` que sean los que cambien el dato `contenido del Holder`, si estos datos me provoca que el` holder cambie` el dato `automaticamente` se lo `notifica` a todos los `observadores` y se le enviará el nuevo dato.
+
+`¿Compose por que lo necesita?` Lo necesita porque cuando `cambie el estado del objeto` automaticamente va a `recomponer` todos los `vistas` (Composables) en donde se utilice ese `Holder`. Los distintos `elementos` se convertiran en `observadores` si ese holder reaccionarian volviendo a pintar todo el composable siempre que el holder cambie el valor.
+
+Hay distintos `tipos` de `Holder Observables`,
+
+MIN 43:00
 
 
 ```java

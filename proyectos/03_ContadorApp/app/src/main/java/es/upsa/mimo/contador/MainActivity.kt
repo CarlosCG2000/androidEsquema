@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import es.upsa.mimo.contador.ui.screens.contador.ContadorScreen
 import es.upsa.mimo.contador.ui.theme.ContadorTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,10 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier
-                    )
+            ContadorScreen() // MI CONTENIDO EN LA ACTIVIDAD
         }
     }
 }

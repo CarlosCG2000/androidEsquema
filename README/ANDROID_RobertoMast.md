@@ -383,7 +383,7 @@ Si ahora ejecutamos vemos que ahora mi variable por ser `remember` trasciende de
 
 * ¿Pero que sucede si cambia la pantalla de rotación? El `ciclo de vida` de la aplicación se `reinicia` y la variable igualmente se reinicia y el contador vuelve a valer el `valor inicial`. Ya que cunado cambia la configuración se mata a la actividad y se reinicia el ciclo de vida.
 
-¿Como podiamos restaurar los valores del ciclo de vida? A traves del método `onSave()`.
+¿Como podiamos restaurar los valores del ciclo de vida? A través del método `onSave()`.
 
 ### 2.4 RememberSaveable
 `RememberSaveable` a diferencia de `remember` que recuerda el dato entre recomposiciones y sin encambio `rememberSaveable` realiza lo mismo pero al final `almacena` el valor en el `bundle` para el ciclo de vida. Y por lo tanto aunque haya reconfiguración (reocmposición) posteriormente segun esta programado Compose y su Actividad recuperan el valor de ese `bundle` y no necesita inicializar la variable con el valor por defecto.
@@ -648,8 +648,3 @@ Por defecto, el ViewModelProvider solo puede instanciar un ViewModel con un cons
 • Puedes usar múltiples ViewModel en una pantalla, pero no abuses de ellos.
 
 🔹 Android (Jetpack Compose) y iOS (SwiftUI) tienen principios similares, pero cada uno usa sus propias herramientas (StateFlow, LiveData en Android y @StateObject, @ObservedObject en SwiftUI). 🚀
-
-
-
-
-

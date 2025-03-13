@@ -458,10 +458,16 @@ Ejecutamos y funciona perfectamente.
 
 Pero vemos que idnependientemente que se reciba o no los datos del `SavedStateHandle` la obtención de la variable del View Model se relazia exactamente igual en los observables (vistas compose que se subscriben al View Model).
 
-### 4. Otros componetes en la interfaz
+## 4. Otros componetes en la interfaz
 Creamos un Slider acorde a la variable del contador y que realize la misma función que los dos botones decrementar e incrementar.
 
 MIN 1:45:00
+
+
+
+
+
+
 
 
 

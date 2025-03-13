@@ -38,7 +38,7 @@ class ContadorViewModel(val savedStateHandle: SavedStateHandle, initialValue: In
         savedStateHandle[CONTADOR_KEY] = value
     }
 
-    companion object{
+    companion object {
         const val CONTADOR_KEY = "es.upsa.mimo.contador.ui.screens.contador.ContadorViewModel.CONTADOR_KEY"
 
         // Queremos que nos devuelve el Factory, es decir un ViewModelProvider.Factory

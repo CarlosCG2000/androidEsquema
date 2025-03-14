@@ -652,7 +652,7 @@ Tanto en `Android` (Kotlin + Jetpack Compose) como en `iOS` (SwiftUI), el `ViewM
 En resumen, la` idea es la misma` en ambos sistemas, pero la `implementación y el ciclo de vida` varían según la plataforma. 🚀
 
 
-# 4_CLASE `14/03/25`
+# 4_CLASE `13/03/25`
 
 # __________ 0. Índice __________
 ## 1. 

@@ -502,6 +502,7 @@ ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUN
 
 - ¿Si ese dato (`contador`) solo lo usamos en la pantalla (función composable) no seria mejor dejarlo como un `Holder Observable` (`State` o `MutableState`) en vez de llevarlo a un `View Model`? ¿Lo hiciste solo de ejemplo para ver los `View Model`? ¿Cuando deberia de llevarse a un `View Model`?
 
+
 - ¿Una `única actividad` en toda la `aplicación`, o cuando deberia tener varias actividades?
 
 - ¿Una `pantalla` tendra un `VM`, pero un `VM` podra tener `muchas pantallas` no?
@@ -510,7 +511,7 @@ ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUN
 
 ### 6.2 Chat GPT
 
-#### QUE TIPOS DE HOLDER OBSERVABLES TIENE Y SUS FUNCIONALIDADES EN ANDROID Y TAMBIEN COMO ES EN IOS
+- QUE TIPOS DE HOLDER OBSERVABLES TIENE Y SUS FUNCIONALIDADES EN ANDROID Y TAMBIEN COMO ES EN IOS
 
 🔹 Android (Jetpack Compose)
 En Jetpack Compose, los datos observables pueden almacenarse en diferentes holders según el alcance y persistencia que se necesite:
@@ -585,6 +586,7 @@ struct CounterView: View {
     }
 }
 ```
+
 3. @ObservedObject (Compartido entre vistas)
 • Similar a remember { viewModel() } en Jetpack Compose cuando se pasa un ViewModel entre vistas.
 ```swift
@@ -598,15 +600,12 @@ struct CounterView: View {
 }
 ```
 
-#### ¿Por qué se necesita un Factory en un ViewModel? ❌❌
+- ¿Por qué se necesita un Factory en un ViewModel? ❌❌
 Por defecto, el ViewModelProvider solo puede instanciar un ViewModel con un constructor vacío. Si tu ViewModel necesita parámetros (por ejemplo, un repositorio), necesitas un Factory para pasarle esos valores.
 
-- Entonces sirve porsi tenemos un repostiorio en produccion y uno en test o algo asi?
+- Entonces sirve por si tenemos un repostiorio en produccion y uno en test o algo asi?
 
-
-🧐 📌 Dudas sobre Android y Jetpack Compose
-
-#### Que diferencias hay entre el VM en Android (Kotlin + Compose) y iOS (SwiftUI) ❌❌
+- Que diferencias hay entre el VM en Android (Kotlin + Compose) y iOS (SwiftUI) ❌❌
 
 #### 1. ¿Si el dato (contador) solo se usa en la pantalla (Composable), es mejor un State en vez de ViewModel?
 

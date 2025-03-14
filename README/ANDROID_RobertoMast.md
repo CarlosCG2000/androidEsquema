@@ -311,7 +311,7 @@ Ya luego lo hago....
 ### 3.4 Objeto `SavedStateHandle`
 ## 4. Otros componetes en la `interfaz`
 ## 5. `Factory` - Personalizar `View Model`
-## 6. Dudas
+## 6. Preguntas
 ### 6.1 Profesor
 ### 6.2 Chat GPT
 # _______________________________
@@ -496,20 +496,11 @@ Más adelante cuando veamos `la inyección de dependecias` veremos que al `const
 
 ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
 
-## 6. Dudas
+## 6. Preguntas
 
 ### 6.1 Profesor
 
 1. ¿Si ese dato (`contador`) solo lo usamos en la pantalla (función composable) no seria mejor dejarlo como un `Holder Observable` (`State` o `MutableState`) en vez de llevarlo a un `View Model`? ¿Lo hiciste solo de ejemplo para ver los `View Model`? ¿Cuando deberia de llevarse a un `View Model`?
-
-
-2. ¿Una `única actividad` en toda la `aplicación`, o cuando deberia tener varias actividades?
-
-3. ¿Una `pantalla` tendra un `VM`, pero un `VM` podra tener `muchas pantallas` no?
-
-4. ¿Pero entonces no es adecuado llamar a varios VMs en una misma pantalla? ¿Yo por ejemplo necesitos diferentes datos en  diferentes fuentes de datos `Personaje`, `Episodios`, `Citas`, yo tengo una pantalla que necesita todos los datos, no estaria bien llamarlos?
-
-#### 1. ¿Si el dato (contador) solo se usa en la pantalla (Composable), es mejor un State en vez de ViewModel?
 
 ✅ Sí, si el dato solo es relevante para la pantalla actual y no se necesita compartir con otras, usa remember o rememberSaveable.
 
@@ -519,41 +510,35 @@ ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUN
 • @State en SwiftUI o remember en Compose si el contador solo afecta a un Button.
 • ViewModel si el contador se usa en varias pantallas.
 
-#### 2. ¿Es mejor una única actividad en toda la aplicación o varias?
+2. ¿Una `única actividad` en toda la `aplicación`, o cuando deberia tener varias actividades?
 
-📌 Depende del caso:
 ✅ Una única Activity con Navigation Compose → Recomendado para arquitecturas modernas.
 	•	Permite manejar pantallas con Composable sin necesidad de crear múltiples Activity.
 	•	Mejora el rendimiento y evita problemas de ciclo de vida.
 
-❌ Varias Activity → Se usa en casos donde se necesita:
-	•	Separar lógicas muy distintas (ej. LoginActivity y MainActivity).
-	•	Interacción con sistemas externos (ej. WebViewActivity).
-
 💡 Conclusión: La mejor práctica actual es tener una sola Activity y manejar la navegación con Navigation Compose.
 
-#### 3. ¿Cada pantalla debe tener un ViewModel? ¿Un ViewModel puede manejar varias pantallas?
+3. ¿Una `pantalla` tendra un `VM`, pero un `VM` podra tener `muchas pantallas` y `una pantalla` muchos `View Models`?
+
+✅ Sí, una misma pantalla puede tener varios ViewModel si necesitar varios datos de diferente responsabilidad.
 ✅ Sí, cada pantalla suele tener su ViewModel para mantener separación de responsabilidades.
 ✅ Sí, un ViewModel puede manejar varias pantallas si tienen datos comunes (ej. un ViewModel de autenticación).
 ❌ No es recomendable usar un ViewModel para muchas pantallas si manejan datos distintos.
 
-#### 4. ¿Puedo llamar a varios ViewModel en una misma pantalla?
-✅ Sí, si cada ViewModel tiene una responsabilidad diferente.
 💡 No abuses de esto. Si un ViewModel ya maneja datos relacionados, no crees otro innecesario.
 
 ✅ Conclusión general
-• Si el dato solo lo usa una pantalla, usa State o remember.
-• Si debe persistir recomposiciones, usa rememberSaveable.
-• Si el dato es compartido entre pantallas o debe sobrevivir cambios de configuración, usa ViewModel.
-• Una sola Activity con Navigation Compose es lo recomendado.
-• Puedes usar múltiples ViewModel en una pantalla, pero no abuses de ellos.
+• Si el dato solo lo usa una pantalla, usa `State` o `remember`.
+• Si debe persistir recomposiciones, usa `rememberSaveable`.
+• Si el `dato es compartido` entre pantallas o debe sobrevivir cambios de configuración, usa `ViewModel`.
+• Una sola `Activity` con `Navigation Compose` es lo recomendado.
+• Puedes usar `múltiples ViewModel` en una `pantalla`, pero `no abuses de ellos`.
 
-🔹 Android (Jetpack Compose) y iOS (SwiftUI) tienen principios similares, pero cada uno usa sus propias herramientas (StateFlow, LiveData en Android y @StateObject, @ObservedObject en SwiftUI). 🚀
-
+🔹 Android (`Jetpack Compose`) y iOS (`SwiftUI`) tienen principios similares, pero cada uno usa sus propias herramientas (StateFlow, LiveData en Android y @StateObject, @ObservedObject en SwiftUI). 🚀
 
 ### 6.2 Chat GPT
 
-1. ¿Qué tipos de `Holder Observables` existen y sus funcionalidades (tanto para Andorid Compose como Ios SwiftUI)?
+1. ¿Qué tipos de `Holder Observables` existen y sus funcionalidades (tanto para `Android Compose` como `iOS SwiftUI`)?
 🔹 `Android (Jetpack Compose)`
 En Jetpack Compose, los datos observables pueden almacenarse en diferentes holders según el alcance y persistencia que se necesite:
 
@@ -642,9 +627,17 @@ struct CounterView: View {
 ```
 
 2. ¿Por qué se `necesita` un `Factory` en un `ViewModel`?
-Por defecto, el ViewModelProvider solo puede instanciar un ViewModel con un constructor vacío. Si tu ViewModel necesita parámetros (por ejemplo, un repositorio), necesitas un Factory para pasarle esos valores.
+Por defecto, el `ViewModelProvider` solo puede `instanciar un ViewModel` con un constructor `vacío`. Si tu ViewModel necesita parámetros (por ejemplo, un `repositorio`), necesitas un Factory para pasarle esos valores.
 
 - Entonces sirve por si tenemos un repositorio en producción y uno en test o algo asi?
+¡Exacto! Un `ViewModel Factory` es útil cuando necesitas proporcionar diferentes `implementaciones de dependencias`, como un repositorio de producción y otro de pruebas (test).
+
+🎯 Ventajas
+✅ `Flexibilidad` → Puedes cambiar entre producción y test fácilmente.
+✅ `Testabilidad` → Facilita las pruebas unitarias sin necesidad de depender de una API real.
+✅ `Inyección de dependencias` → Separa la lógica de obtención de datos del ViewModel.
+
+Si usas `Hilt/Dagger`, puedes evitar el Factory y usar inyección de dependencias directamente. Pero si no usas Hilt, un ViewModelFactory es una buena práctica. 🚀
 
 3. Que `diferencias` hay entre el `VM` en `Android (Kotlin + Compose)` y `iOS (SwiftUI)`
 
@@ -657,3 +650,15 @@ Tanto en `Android` (Kotlin + Jetpack Compose) como en `iOS` (SwiftUI), el `ViewM
 - `Inyección de dependencias`: Android usa Hilt, en iOS se maneja manualmente o con EnvironmentObject.
 
 En resumen, la` idea es la misma` en ambos sistemas, pero la `implementación y el ciclo de vida` varían según la plataforma. 🚀
+
+
+# 4_CLASE `14/03/25`
+
+# __________ 0. Índice __________
+## 1. 
+# _______________________________
+
+Vamos a crear un nuevo proyecto `04_ListadoContactos`. En Compose (con Kotlin).
+Vamos a diseñar una aplicación más completa con `arquitectura de View Model` y navegación entre `dos pantalla`s una con un listado de contactos y la otra con los detalles de cada contacto.
+
+## 1. 

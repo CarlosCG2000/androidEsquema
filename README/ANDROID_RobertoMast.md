@@ -745,7 +745,7 @@ Tendremos:
 ## 4. Fichero: `ContactsStateUI.kt` **3**
 Es el `estado de mi vista`. Va a recibir una lista de objetos de contactos.
 
-Estas clases siempre deben de ser `data clases` que son clases no mutables, es decir inmutables. Tenemos que tener en cuenta que para que el `Holder` notifique a sus `observadores` hay que cambiar el `Holder`. Eso quiere decir que si `mi objeto` apunta al `Holder` y muto dicho objeto, en verdad el `Holder` nos esta `mutando` y por lo tanto los `observadores` no tienen `notificación` de que se haya cambiado.
+Estas clases siempre deben de ser `data class` que son clases no mutables, es decir inmutables. Tenemos que tener en cuenta que para que el `Holder` notifique a sus `observadores` hay que cambiar el `Holder`. Eso quiere decir que si `mi objeto` apunta al `Holder` y muto dicho objeto, en verdad el `Holder` nos esta `mutando` y por lo tanto los `observadores` no tienen `notificación` de que se haya cambiado.
 
-Al ser `data clases` me estan generando otras funcionalidades como `getter`, `setter` y sobre todo el `copy` que es el necesario porque me esta creando `otro objeto` de la `esa clase` donde se pueden cambiar el `valor de determinadas propiedades`.
+Al ser `data class` me estan generando otras funcionalidades como `getter`, `setter` y sobre todo el `copy` que es el necesario porque me esta creando `otro objeto` de `esa clase` donde se pueden cambiar el `valor de determinadas propiedades`.
 

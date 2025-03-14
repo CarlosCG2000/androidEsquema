@@ -749,3 +749,5 @@ Estas clases siempre deben de ser `data class` que son clases no mutables, es de
 
 Al ser `data class` me estan generando otras funcionalidades como `getter`, `setter` y sobre todo el `copy` que es el necesario porque me esta creando `otro objeto` de `esa clase` donde se pueden cambiar el `valor de determinadas propiedades`.
 
+
+MIN 1:02:00

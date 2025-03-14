@@ -784,3 +784,5 @@ Hay definimos la `implementación` del `dao, repositorio y todos los casos de us
 
 Hay que registrar el `Application` en el `Android Manifest`: dentro de application añado `android:name=".presentation.ListApplication"`.
 
+## 6. 
+Vamos a gestionar hacer click sobre un contacto del listado de la vista me rediriga a una pantalla que muestre los datos de ese contacto.

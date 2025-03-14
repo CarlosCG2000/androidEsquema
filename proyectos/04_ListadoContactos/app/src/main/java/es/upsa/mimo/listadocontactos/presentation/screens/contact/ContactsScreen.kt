@@ -3,11 +3,13 @@ package es.upsa.mimo.listadocontactos.presentation.screens.contact
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
@@ -56,11 +59,15 @@ fun ContactsScreen() {
 
 @Composable
 fun ItemContact(contact: Contact){
-    Card(modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(10),
+    Card(modifier = Modifier.fillMaxWidth()
+                            .padding(10.dp),
+        shape = RoundedCornerShape(20),
     ) {
-        Column(modifier = Modifier.fillMaxWidth()){
-            Text(contact.name)
+        Column(modifier =   Modifier.fillMaxWidth()
+                                    .padding(15.dp)
+        ){
+            Text(contact.name,
+                style = MaterialTheme.typography.titleLarge)
             Text(contact.email)
         }
     }

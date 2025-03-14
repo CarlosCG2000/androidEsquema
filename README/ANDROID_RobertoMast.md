@@ -709,18 +709,24 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
     **ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA - A PARTIR DEL `MIN 30:00`**
 
     + Subcarpeta `screens`:
-        + Subcarpeta `contacts`:
+        + Subcarpeta `contactsList`:
             - Fichero: `ContactsScreen.kt`: es un `fun` de tipo `Composable`. **1**
 
             - Fichero: `ContactsViewModel.kt`: es un `class` que extiende de `ViewModel()`. **2**
 
             - Fichero: `ContactsStateUI.kt`: es un `data class`. **3**
 
-        + Subcarpeta `contact`:
+        + Subcarpeta `contactDetail`:  **5**
+            - Fichero: `ContactDetailScreen.kt`: es un `fun` de tipo `Composable`.
+
+            - Fichero: `ContactDetailViewModel.kt`: es un `class` que extiende de `ViewModel()`.
+
+            - Fichero: `ContactDetailStateUI.kt`: es un `data class`.
 
     - Fichero `ListApplication.kt`: es un clase con componente `Application` (en vez de `Activity` en el caso del `MainActivity.kt`).  **4**
 
-    + Subcarpeta `navegation`:
+    + Subcarpeta `navegation`: **6**
+        - Fichero `ListApplication.kt`: 
 
 
 [ Los datos no tienen porque coincidir de la misma clase en `Data` (fuente de verdad) con nuestro `Domain` (aplicación) o nuestra `Presentation` (vistas).
@@ -784,5 +790,11 @@ Hay definimos la `implementación` del `dao, repositorio y todos los casos de us
 
 Hay que registrar el `Application` en el `Android Manifest`: dentro de application añado `android:name=".presentation.ListApplication"`.
 
-## 6. 
+## 6. Subcarpeta `contact`  **5**
 Vamos a gestionar hacer click sobre un contacto del listado de la vista me rediriga a una pantalla que muestre los datos de ese contacto.
+
+Hace exactamente lo mismos pasos para los ficheros de la subcarpeta `contactsList` pero con los nuevos ficheros para la lógica de la carpeta `contactDetail`
+
+## 7. Subcarpeta `navegation`  **6**
+
+MIN 2:03:51

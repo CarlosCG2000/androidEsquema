@@ -1,31 +1,27 @@
-package es.upsa.mimo.listadocontactos.presentation.screens.contact
+package es.upsa.mimo.listadocontactos.presentation.screens.contactDetail
 
-import android.app.Application
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.Factory
 import androidx.lifecycle.viewmodel.CreationExtras
-import es.upsa.mimo.listadocontactos.domain.usecases.GetContactsUsecase
+import es.upsa.mimo.listadocontactos.domain.usecases.GetContactByIdUsecase
 import es.upsa.mimo.listadocontactos.presentation.ListApplication
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+class ContactDetailViewModel(val getContactByIdUsecase: GetContactByIdUsecase): ViewModel() {
 
-class ContactsViewModel(val getContactsUsecase: GetContactsUsecase): ViewModel() {
-    private val _state: MutableStateFlow<ContactsStateUI> = MutableStateFlow(ContactsStateUI()) // asincrono para manejarlo en segundo plano
+    // asincrono para manejarlo en segundo plano
+    private val _state: MutableStateFlow<ContactDetailStateUI> = MutableStateFlow(ContactDetailStateUI())
+    val state: StateFlow<ContactDetailStateUI> = _state.asStateFlow() // tambien asincrono pero inmutable
 
-    val state: StateFlow<ContactsStateUI> = _state.asStateFlow() // tambien asincrono pero inmutable
+    fun findContactById(id:Long){
+        val contact = getContactByIdUsecase.execute(id)
 
-    // Hay que llamar a los casos de uso
-    fun queryContacts(){
-        val contactsList = getContactsUsecase.execute() // recibimos la lista de los contactos
-
-        // it es 'state.value' que es el valor actual de los contactos y lo actualizamos a 'contactsList'
         _state.update {
-            it.copy( contacts = contactsList )
+            it.copy( contact = contact)
         }
     }
 
@@ -37,10 +33,9 @@ class ContactsViewModel(val getContactsUsecase: GetContactsUsecase): ViewModel()
                 val application = extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ListApplication
 
                 // Puedo acceder a través de 'application' al casos de uso que le pasamos por parámetro.
-                return ContactsViewModel (application.getContactsUsecase) as T
+                return ContactDetailViewModel (application.getContactByIdUsecase) as T
             }
         }
     }
-
 
 }

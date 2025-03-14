@@ -1,4 +1,4 @@
-package es.upsa.mimo.listadocontactos.presentation.screens.contact
+package es.upsa.mimo.listadocontactos.presentation.screens.contactsList
 
 import es.upsa.mimo.listadocontactos.domain.entities.Contact
 

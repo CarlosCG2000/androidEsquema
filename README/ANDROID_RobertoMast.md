@@ -749,7 +749,6 @@ Tendremos:
 Queremos que siempre que se ejecute mi vista queremos que se ejecute el caso de uso de `queryContacts()` del View Model. Y eso se hace a través de `LaunchedEffect`.
 
 ## 3. Fichero: `ContactsViewModel.kt` **2**
-
 Nos definiremos nuestras variables:
 1. `_state` de tipo Holder `MutableStateFlow<ContactsStateUI>`. La variable de estado.
 2. `state` de tipo `StateFlow<ContactsStateUI>`

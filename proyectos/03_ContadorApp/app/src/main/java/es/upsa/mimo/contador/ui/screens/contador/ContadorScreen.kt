@@ -121,7 +121,7 @@ fun ContadorScreenContraintSet(): ConstraintSet {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ContadorScreenPreview() {
     ContadorScreen()

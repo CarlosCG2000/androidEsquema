@@ -708,9 +708,11 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
 
     + Subcarpeta `screens`: ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA - A PARTIR DEL MIN 30:00
         + Subcarpeta `contacts`:
-            - Fichero: `ContactsScreen.kt`: es un `fun` de tipo `Composable`
+            - Fichero: `ContactsScreen.kt`: es un `fun` de tipo `Composable`. **1**
 
-            - Fichero: `ContactsViewModel.kt`: es un `class` que extiende de `ViewModel()`
+            - Fichero: `ContactsViewModel.kt`: es un `class` que extiende de `ViewModel()`. **2**
+
+            - Fichero: `ContactsStateUI.kt`: es un `data class`. **3**
 
         + Subcarpeta `contact`:
 
@@ -730,5 +732,20 @@ Lo que si se necesitarian es mapeadores para poder convertir la `entidad` corres
 
 [ Las `interfaces` del `repository` y `usecases` son `genericas`, y para cada `implementación` dependiendo del contexto que realizaremos usaremos unas u otras sin tener que cambiar más que la llamada al `View Model` que lo realizará más adelante sin afectar a las `vistas` ]
 
-## 2.
+## 2. Fichero: `ContactsScreen.kt` **1**
+Añadimos las librerias correspondientes para usar Constraint Layout en Compose (`androidx.constraintlayout`) y para el ViewModel de Compose (`androidx.lifecycle`).
+
+Tendremos:
+1. La función `ContactsScreen()` que sea `Composable`
+2. La función `contactsScreenConstraintSet()` que sea el `ConstraintSet`
+3. La función `ContactsScreenPreview()` que sea un `Preview` y `Composable`
+
+## 3. Fichero: `ContactsViewModel.kt` **2**
+
+## 4. Fichero: `ContactsStateUI.kt` **3**
+Es el `estado de mi vista`. Va a recibir una lista de objetos de contactos.
+
+Estas clases siempre deben de ser `data clases` que son clases no mutables, es decir inmutables. Tenemos que tener en cuenta que para que el `Holder` notifique a sus `observadores` hay que cambiar el `Holder`. Eso quiere decir que si `mi objeto` apunta al `Holder` y muto dicho objeto, en verdad el `Holder` nos esta `mutando` y por lo tanto los `observadores` no tienen `notificación` de que se haya cambiado.
+
+Al ser `data clases` me estan generando otras funcionalidades como `getter`, `setter` y sobre todo el `copy` que es el necesario porque me esta creando `otro objeto` de la `esa clase` donde se pueden cambiar el `valor de determinadas propiedades`.
 

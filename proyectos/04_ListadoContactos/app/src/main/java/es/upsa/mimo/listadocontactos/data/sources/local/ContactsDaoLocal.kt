@@ -1,10 +1,9 @@
 package es.upsa.mimo.listadocontactos.data.sources.local
 
-import androidx.compose.runtime.mutableStateOf
 import es.upsa.mimo.listadocontactos.data.sources.ContactsDao
 import es.upsa.mimo.listadocontactos.data.entities.ContactDB
 
-class ContactDaoLocal: ContactsDao{
+class ContactsDaoLocal: ContactsDao{
 
     // Mock ficticia de datos para acceder a ella
     private val data: MutableMap<Long, ContactDB> = mutableMapOf(

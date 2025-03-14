@@ -706,7 +706,9 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
     + Subcarpeta `ui.theme`
     Se encuentra por defecto los ficheros de `Color.kt`, `Theme.kt`, `Type.kt`.
 
-    + Subcarpeta `screens`: ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA - A PARTIR DEL MIN 30:00
+    **ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA - A PARTIR DEL `MIN 30:00`**
+
+    + Subcarpeta `screens`:
         + Subcarpeta `contacts`:
             - Fichero: `ContactsScreen.kt`: es un `fun` de tipo `Composable`. **1**
 
@@ -716,7 +718,10 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
 
         + Subcarpeta `contact`:
 
-    + Subcarpeta `navegation`: ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA
+    - Fichero `ListApplication.kt`: es un clase con componente `Application` (en vez de `Activity` en el caso del `MainActivity.kt`).  **4**
+
+    + Subcarpeta `navegation`:
+
 
 [ Los datos no tienen porque coincidir de la misma clase en `Data` (fuente de verdad) con nuestro `Domain` (aplicación) o nuestra `Presentation` (vistas).
 
@@ -738,9 +743,29 @@ Añadimos las librerias correspondientes para usar Constraint Layout en Compose 
 Tendremos:
 1. La función `ContactsScreen()` que sea `Composable`
 2. La función `contactsScreenConstraintSet()` que sea el `ConstraintSet`
-3. La función `ContactsScreenPreview()` que sea un `Preview` y `Composable`
+3. La función `ItemContact(contact: Contact)` que sea `Composable`
+4. La función `ContactsScreenPreview()` que sea un `Preview` y `Composable`
+
+Queremos que siempre que se ejecute mi vista queremos que se ejecute el caso de uso de `queryContacts()` del View Model. Y eso se hace a través de `LaunchedEffect`.
 
 ## 3. Fichero: `ContactsViewModel.kt` **2**
+
+Nos definiremos nuestras variables:
+1. `_state` de tipo Holder `MutableStateFlow<ContactsStateUI>`. La variable de estado.
+2. `state` de tipo `StateFlow<ContactsStateUI>`
+
+Esas dos variables (del View Model) sirven para notificar a los observables (a las vistas) de que ha cambiado el `ContactsStateUI` (el estado).
+
+Imagen [`3_Pasos del View Model`]
+
+Hay que llamar a los casos de uso (`usecases`) en las funciones del View Model,por lo tanto hay que pasarle como `parametro` dichos casos de uso (las `interfaces`, no las implementaciones).
+
+Pero solo hay que pasarle el `caso de uso` (obtener todas los contactos) que se utiliza en este `View Model` (`ContactsViewModel.kt`).
+
+3. La función `queryContacts()`, que obtiene el nuevo estado del caso de uso.
+
+4. `Inyección de forma manual` (todavia no hemos visto `inyección de dependecias`).
+Dentro de un contenedor estatico (companion object) creamos un `Factory`.
 
 ## 4. Fichero: `ContactsStateUI.kt` **3**
 Es el `estado de mi vista`. Va a recibir una lista de objetos de contactos.
@@ -749,5 +774,14 @@ Estas clases siempre deben de ser `data class` que son clases no mutables, es de
 
 Al ser `data class` me estan generando otras funcionalidades como `getter`, `setter` y sobre todo el `copy` que es el necesario porque me esta creando `otro objeto` de `esa clase` donde se pueden cambiar el `valor de determinadas propiedades`.
 
+## 5. Fichero: `ListApplication.kt`. **4**
+Es un clase `Application` (en vez de `Actividad`).
 
-MIN 1:02:00
+Nos permite poder crear el `caso de uso` una `unica vez` (al igual que para el repositorio y dao), esto se hace e un `componente que sea unico` en mi aplicación.
+
+Hasta ahora habiamos visto entre los componentes las `Activity` pero que habia otros como son el objeto `Aplication`. Este objeto solo tendra una `única instacia del objeto Aplication`. Eso me permite definir esa `clase Aplication` y en ella es donde `definimos` nuestro `dao, repositorio y casos de uso`. Ese `objeto Aplication` va a ser accesible en cuanto la aplicación este ejecutando y por tanto por todos los `View Models`.
+
+Hay definimos la `implementación` del `dao, repositorio y todos los casos de uso` para la `producción` en `especifico`. Hay es donde tenemos que cambiar si queremos modificar el de producción por una implementación en test, otra base de datos, etc de las que tengamos definidas.
+
+Hay que registrar el `Application` en el `Android Manifest`: dentro de application añado `android:name=".presentation.ListApplication"`.
+

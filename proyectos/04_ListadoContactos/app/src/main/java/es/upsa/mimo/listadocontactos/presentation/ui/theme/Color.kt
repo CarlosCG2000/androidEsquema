@@ -1,4 +1,4 @@
-package es.upsa.mimo.listadocontactos.ui.theme
+package es.upsa.mimo.listadocontactos.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -659,6 +659,62 @@ En resumen, la` idea es la misma` en ambos sistemas, pero la `implementación y 
 # _______________________________
 
 Vamos a crear un nuevo proyecto `04_ListadoContactos`. En Compose (con Kotlin).
-Vamos a diseñar una aplicación más completa con `arquitectura de View Model` y navegación entre `dos pantalla`s una con un listado de contactos y la otra con los detalles de cada contacto.
+Vamos a diseñar una aplicación más completa con `arquitectura de View Model` y navegación entre `dos pantallas` una con un listado de contactos y la otra con los detalles de cada contacto.
 
-## 1. 
+## 1. Esqueleto de cualquier aplicación
+Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (Roberto) con estos datos:
+
+* Carpeta `data`:
+    + Subcarpeta `entities`:
+      - Fichero `ContactDB.kt`: es un `data class` con los atributos que esta conformado el Contacto en la fuente de verda de información.
+
+    + Subcarpeta `mappers`:
+        - Fichero `DataMappers.kt`: es un `fun`, una función de extensión de `ContactDB` para mapear a una entidad a `Contact` (formato de la entidad para la app).
+
+    + Subcarpeta `sources`:
+        - Fichero `ContactsDao.kt`: es una `interface`, un objeto que definen todas las funciones de lógica que se van a realizar en las fuentes de verdad.
+
+        + Subcarpeta `local`:
+            Es una `fuentes de verdad especifica`, en este caso se usa una fuente local de donde vamos a obtener los datos.
+
+            - Fichero `ContactDaoLocal.kt`: accedemos a través de la implementación de su Dao `ContactsDao.kt` (la interface de acceso a datos) a las funciones que se implementan ahora de una forma determinada para esta determinada fuente de datos.
+
+* Carpeta `domain`:
+    + Subcarpeta `entities`:
+        - Fichero `Contact.kt`: es un `data class` con los atributos que esta conformado el Contacto en la aplicación.
+
+    + Subcarpeta `repository`:
+        - Fichero `ContactsRepository.kt`: es una `interface` donde se definen todas las funciones de lógica que se realizan el sección de contactos de la aplicación. Van a ser obtener todos los contactos (listado de contactos) y obtener un contacto especifico (detalles del contacto).
+
+        + Subcarpeta `impl`:
+            - Fichero `ContactsRepositoryImpl`: es una `class`, que recibe como parametro la `interface` de `ContactsDao.kt` (del `data`) e implementa la `interface` de `ContactsRepository.kt`. Para la implementación de todas las funciones para una fuente de datos determinada (en este caso local con `ContactDaoLocal.kt`) y poder hacer el mapeo de los datos de la fuente de datos (`ContactDB.kt`) a los que se utilizan en la aplicación (`Contact.kt`).
+
+    + Subcarpeta `usecases`:
+        - Fichero `GetContactsUsecase.kt`: es una `interface` para el individual caso de uso de obtener todos los contactos.
+        - Fichero `GetContactByIdUsecase`: es una `interface` para el individual caso de uso de obtener un contacto en especifico.
+
+        + Subcarpeta `impl`:
+            Los ficheros van a ser `class` que tiene como parámetro la `interface` del repositorio (`ContactsRepository`) y como implementación la `interface` de su caso de uso especifico.
+
+            - Fichero `GetContactsUsecaseImpl.kt`: es un `class` que tiene como parámetro la `interface` de `ContactsRepository` y como implementación la `interface` de `GetContactsUsecase.kt` que obliga a declarar su función y desarrollarla (según el contexto que se vaya a usar).
+
+            - Fichero `GetContactByIdUsecaseImpl.kt`: es un `class` que tiene como parámetro la `interface` de `ContactsRepository` y como implementación la `interface` de `GetContactByIdUsecase.kt` que obliga a declarar su función y desarrollarla (según el contexto que se vaya a usar).
+
+* Carpeta `presentation`:
+
+
+[ Los datos no tienen porque coincidir de la misma clase en `Data` (fuente de verdad) con nuestro `Domain` (aplicación) o nuestra `Presentation` (vistas).
+
+- En el `Data` a través de `sources` --> `ContactsDao.kt` se llaman a la clase con la entidad que se encuentra en la fuente de verdad de información (BD, servidor, mock de datos, etc)
+
+- En el `Domain`, a través de `repository` --> `ContactsRepository.kt` se llaman a la clase con la entidad que se utilizará en la aplicación (para realizar operaciones)
+
+- En el `Presentation`, igual ...
+
+Lo que si se necesitarian es mapeadores para poder convertir la `entidad` correspondiente en mi `fuente de datos` a la `entidad` de mi `Domain`.]
+
+[ Si se quiere tener unos `casos de uso de implementación` con `otro contexto` con operaciones en vez de un mock de datos, para una base de datos o servidor web simplemente seria llamar a estos en el parámetro del `interface del repositorio` (para el mock, BD, servidor) de esa y luego implementación la `interface de cada caso de uso` como se opere para dicho contexto ]
+
+[ Las `interfaces` del `repository` y `usecases` son `genericas`, y para cada `implementación` dependiendo del contexto que realizaremos usaremos unas u otras sin tener que cambiar más que la llamada al `View Model` que lo realizará más adelante sin afectar a las `vistas` ]
+
+## 2.

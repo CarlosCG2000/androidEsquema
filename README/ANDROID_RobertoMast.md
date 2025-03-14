@@ -371,7 +371,7 @@ Deberiamos conseguir que las variables perduren la ejecución de la función (Co
 
 Si la variable (objeto) `mutableState` extiende del ciclo de vida, se puede cambiar el valor de la variable (contador). Para poder acceder al valor ahora se deberia de realizar a través de su `.value`.
 
-### 2.3.1 By
+#### 2.3.1 By
 La variable con `remember` se puede definir a través de hacer un `=` o a través de `by`.
 Si la definimos a través de `by` lo que sucede es que lo que se ponga a la derecha (el `MutableState`) se va a convertir en un `delegado`. Lo que me va a devolver es un `objeto`, donde ese objeto va a contener las propiedades `get` y `set` en función de si lo he definido como `val` o `var`.
 

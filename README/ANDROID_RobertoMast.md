@@ -701,7 +701,20 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
             - Fichero `GetContactByIdUsecaseImpl.kt`: es un `class` que tiene como parámetro la `interface` de `ContactsRepository` y como implementación la `interface` de `GetContactByIdUsecase.kt` que obliga a declarar su función y desarrollarla (según el contexto que se vaya a usar).
 
 * Carpeta `presentation`:
+    - Fichero `MainActivity.kt`: es una `class`, la única actividad que va a tener la aplicación donde se llamaran a las vistas.
 
+    + Subcarpeta `ui.theme`
+    Se encuentra por defecto los ficheros de `Color.kt`, `Theme.kt`, `Type.kt`.
+
+    + Subcarpeta `screens`: ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA - A PARTIR DEL MIN 30:00
+        + Subcarpeta `contacts`:
+            - Fichero: `ContactsScreen.kt`: es un `fun` de tipo `Composable`
+
+            - Fichero: `ContactsViewModel.kt`: es un `class` que extiende de `ViewModel()`
+
+        + Subcarpeta `contact`:
+
+    + Subcarpeta `navegation`: ESTO ES LO QUE VAMOS A IMPLEMENTAR AHORA
 
 [ Los datos no tienen porque coincidir de la misma clase en `Data` (fuente de verdad) con nuestro `Domain` (aplicación) o nuestra `Presentation` (vistas).
 
@@ -718,3 +731,4 @@ Lo que si se necesitarian es mapeadores para poder convertir la `entidad` corres
 [ Las `interfaces` del `repository` y `usecases` son `genericas`, y para cada `implementación` dependiendo del contexto que realizaremos usaremos unas u otras sin tener que cambiar más que la llamada al `View Model` que lo realizará más adelante sin afectar a las `vistas` ]
 
 ## 2.
+

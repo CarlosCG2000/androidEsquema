@@ -648,4 +648,12 @@ Por defecto, el ViewModelProvider solo puede instanciar un ViewModel con un cons
 
 3. Que `diferencias` hay entre el `VM` en `Android (Kotlin + Compose)` y `iOS (SwiftUI)`
 
+Tanto en `Android` (Kotlin + Jetpack Compose) como en `iOS` (SwiftUI), el `ViewModel` tiene el mismo propósito:` manejar la lógica de negocio`, `gestionar el estado` y `separarlo de la UI`. Sin embargo, hay `diferencias` clave en su implementación y ciclo de vida
 
+📌 Principales Diferencias Resumidas
+- `Ciclo de vida`: En Android el ViewModel sobrevive a cambios de configuración. En iOS, si no se usa @StateObject, se recrea en cada renderizado.
+- `Manejo de estado`: Android usa StateFlow o LiveData, mientras que iOS usa @Published.
+- `Manejo de concurrencia`: Android usa Kotlin Coroutines, iOS usa Combine o async/await.
+- `Inyección de dependencias`: Android usa Hilt, en iOS se maneja manualmente o con EnvironmentObject.
+
+En resumen, la` idea es la misma` en ambos sistemas, pero la `implementación y el ciclo de vida` varían según la plataforma. 🚀

@@ -726,7 +726,7 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
     - Fichero `ListApplication.kt`: es un clase con componente `Application` (en vez de `Activity` en el caso del `MainActivity.kt`).  **4**
 
     + Subcarpeta `navegation`: **6**
-        - Fichero `ListApplication.kt`: 
+        - Fichero `xxxxx.kt`: 
 
 
 [ Los datos no tienen porque coincidir de la misma clase en `Data` (fuente de verdad) con nuestro `Domain` (aplicación) o nuestra `Presentation` (vistas).

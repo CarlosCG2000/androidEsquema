@@ -726,7 +726,7 @@ Inicialmente el esqueleto de la aplicación ya viene realizado por el profesor (
     - Fichero `ListApplication.kt`: es un clase con componente `Application` (en vez de `Activity` en el caso del `MainActivity.kt`).  **4**
 
     + Subcarpeta `navegation`: **6**
-        - Fichero `xxxxx.kt`: 
+        - Fichero `ApplicationNavegation.kt`: es un `fun`de tipo `Composable`.
 
 
 [ Los datos no tienen porque coincidir de la misma clase en `Data` (fuente de verdad) con nuestro `Domain` (aplicación) o nuestra `Presentation` (vistas).
@@ -779,7 +779,7 @@ Estas clases siempre deben de ser `data class` que son clases no mutables, es de
 
 Al ser `data class` me estan generando otras funcionalidades como `getter`, `setter` y sobre todo el `copy` que es el necesario porque me esta creando `otro objeto` de `esa clase` donde se pueden cambiar el `valor de determinadas propiedades`.
 
-## 5. Fichero: `ListApplication.kt`. **4**
+## 5. Fichero: `ListApplication.kt` **4**
 Es un clase `Application` (en vez de `Actividad`).
 
 Nos permite poder crear el `caso de uso` una `unica vez` (al igual que para el repositorio y dao), esto se hace e un `componente que sea unico` en mi aplicación.
@@ -790,11 +790,79 @@ Hay definimos la `implementación` del `dao, repositorio y todos los casos de us
 
 Hay que registrar el `Application` en el `Android Manifest`: dentro de application añado `android:name=".presentation.ListApplication"`.
 
-## 6. Subcarpeta `contact`  **5**
+## 6. Subcarpeta `contact` **5**
 Vamos a gestionar hacer click sobre un contacto del listado de la vista me rediriga a una pantalla que muestre los datos de ese contacto.
 
 Hace exactamente lo mismos pasos para los ficheros de la subcarpeta `contactsList` pero con los nuevos ficheros para la lógica de la carpeta `contactDetail`
 
-## 7. Subcarpeta `navegation`  **6**
+## 7. Subcarpeta `navegation` **6**
+La navegación entre la vista del listado que contactos a los detalles de contacto.
 
-MIN 2:03:51
+¿Como nos vamos a mover entre las distintas pantallas?
+Para eso tenemos que hacer uso de la libreria `Navigation Compose`.
+
+Añadido las dependencias de forma manual (con código):
+
+Fichero `libs.version.toml`
+```java
+[versions]
+...
+## Navigation compose
+navigationCompose = "2.8.8"
+kotlinxSerialization = "1.2.1"
+
+[libraries]
+...
+## Navigation compose
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+[plugins]
+...
+## Navigation compose
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+```
+
+Fichero `build.gradle.kts`
+```java
+plugins {
+    ...
+    alias(libs.plugins.kotlin.serialization) // Navigation compose
+}
+
+dependencies {
+    ...
+    // Navigation compose
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+    ...
+}
+```
+
+Consiste que desde una pantalla pueda transitar a otra pantalla y luego poder regresar a la primera.
+
+Para describir estos objetos se tienen que hacer serializables (`@Serializable`), eso querra decir que Kotlin lo va a serializar a través de json.
+
+Esos objetos de alguna forma deberian tener todos los datos necesarios para poder invocar una pantalla.
+
+El fichero `ApplicationNavegation.kt` es un `fun` de tipo `Composable`.
+
+Contiene la efinición de destinos a través de `objetos` o `clases` (con parámetros que representan propiedades)
+
+Necesitamos un `NavHost` que va a describir el `grafo de navegación`. Para ello hay que especificar el `NavController`, que sera el objeto que a través del cual vamos a poder movernos, ir a través de una pantalla a otra.
+
+`NavHost` es como una `máquina de estados` nosotros vamos a describir distintos estados y le vamos a marcar en estado inicial. O lo que es lo mismo le estamos indicando `distintos destinos` y le indicamos  cual va a ser el `destino inicial`.
+
+Tenemos que crear el `grafo de navegación`.
+Cuando yo quiero ir un `destino` descrito a través de un objeto yo lo que tendré que hacer es `invocar a la función` que me lleve a `la pantalla` correspondiente.
+Cuando me indique que `el destino` es otro `objeto` a su vez, yo tendré que acceder a la pantalla correspodiente a través de `una lambda` para acceder a dicha pantalla.
+
+Si una pantalla ademá de poder navegar a `otra pantalla`, yo tuviese otra pantalla y tambien puedie navegar a ella deberia de crear `otro lambda para ella.` Le tengo que pasar `tantas lamdbas` como `destinos` pueda tener la pantalla. Siempre hay que pasarle la lambda que contenga el código a través del que voy a navegar.
+
+
+En conclusión vemos como en una `unica actividad` es sufiente yo navegar entre `distintas pantallas`, ya que s ele puede pasar la `funcion Composable de navegación`.
+
+Se `navega` simplemente `invocandolas` a través de `un grafo de navegación` a que pantalla es la que tengo que invocar.
+
+
+

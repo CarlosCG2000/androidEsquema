@@ -1,5 +1,6 @@
 package es.upsa.mimo.listadocontactos.presentation.screens.contactsList
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -25,8 +27,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import es.upsa.mimo.listadocontactos.domain.entities.Contact
 
 
-@Composable // Las funciones Composable se ponen en mayuúsculas
-fun ContactsScreen() {
+@Composable // Las funciones Composable se ponen en mayúsculas
+/** lambda como id para enviar por la navegación a la vista hijo*/
+fun ContactsScreen( onItemClick: (Long) -> Unit ) {
 
     val viewModel: ContactsViewModel = viewModel(factory = ContactsViewModel.factory())
     val state: State<ContactsStateUI> = viewModel.state.collectAsState() // sincrono para manejarlo en la UI
@@ -49,7 +52,7 @@ fun ContactsScreen() {
 //            }
 
             items(items = state.value.contacts) { contact ->
-                ItemContact(contact)
+                ItemContact(contact, onItemClick)
             }
 
         }
@@ -57,9 +60,13 @@ fun ContactsScreen() {
 }
 
 @Composable
-fun ItemContact(contact: Contact){
+fun ItemContact(contact: Contact, onItemClick: (Long) -> Unit){
     Card(modifier = Modifier.fillMaxWidth()
-                            .padding(10.dp),
+                            .padding(10.dp)
+        /** función de click pasando el 'id' para navegar a la pantalla de contacto en detalle */
+                            .clickable(role = Role.Button){
+                                onItemClick(contact.id)
+                            },
         shape = RoundedCornerShape(20),
     ) {
         Column(modifier =   Modifier.fillMaxWidth()
@@ -93,5 +100,5 @@ fun contactsScreenConstraintSet(): ConstraintSet{
 @Preview(showBackground = true)
 @Composable
 fun ContactsScreenPreview() {
-    ContactsScreen()
+    ContactsScreen(onItemClick = {})
 }

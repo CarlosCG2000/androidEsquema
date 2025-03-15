@@ -655,7 +655,13 @@ En resumen, la` idea es la misma` en ambos sistemas, pero la `implementación y 
 # 4_CLASE `13/03/25`
 
 # __________ 0. Índice __________
-## 1. 
+## 1. Esqueleto de cualquier aplicación
+## 2. Fichero: `ContactsScreen.kt` **1**
+## 3. Fichero: `ContactsViewModel.kt` **2**
+## 4. Fichero: `ContactsStateUI.kt` **3**
+## 5. Fichero: `ListApplication.kt` **4**
+## 6. Subcarpeta `contact` **5**
+## 7. Subcarpeta `navegation` **6**
 # _______________________________
 
 Vamos a crear un nuevo proyecto `04_ListadoContactos`. En Compose (con Kotlin).
@@ -863,6 +869,8 @@ Si una pantalla ademá de poder navegar a `otra pantalla`, yo tuviese otra panta
 En conclusión vemos como en una `unica actividad` es sufiente yo navegar entre `distintas pantallas`, ya que s ele puede pasar la `funcion Composable de navegación`.
 
 Se `navega` simplemente `invocandolas` a través de `un grafo de navegación` a que pantalla es la que tengo que invocar.
+
+
 
 
 

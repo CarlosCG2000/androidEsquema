@@ -492,10 +492,6 @@ Por tanto, nosotros cuando definimos un `View Model` podemos personalizar los `p
 
 Más adelante cuando veamos `la inyección de dependecias` veremos que al `constructor del View Model` se le pueden `inyectar los datos`.
 
-
-
-ANDROID Y TAMBIEN COMO ES EN IOS (QUE TIPOS DE HOLDER OBERVABLES TIENE Y SUS FUNCIONALIDADES)
-
 ## 6. Preguntas
 
 ### 6.1 Profesor

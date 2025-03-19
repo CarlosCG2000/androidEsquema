@@ -3,7 +3,7 @@ package es.upsa.mimo.listadocontactos.data.sources.local
 import es.upsa.mimo.listadocontactos.data.sources.ContactsDao
 import es.upsa.mimo.listadocontactos.data.entities.ContactDB
 
-class ContactsDaoLocal: ContactsDao{
+class ContactsDaoLocal: ContactsDao {
 
     // Mock ficticia de datos para acceder a ella
     private val data: MutableMap<Long, ContactDB> = mutableMapOf(

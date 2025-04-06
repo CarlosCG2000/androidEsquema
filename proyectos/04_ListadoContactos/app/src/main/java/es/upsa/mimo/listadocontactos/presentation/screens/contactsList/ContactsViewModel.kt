@@ -31,7 +31,7 @@ class ContactsViewModel(val getContactsUsecase: GetContactsUsecase): ViewModel()
         fun factory(): Factory = object : Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 // Accedemos al objeto Aplication con la implementacion (unica que tenemos)
-                // A través de extras s epuede acceder al Aplication (al igual que se podia al Bundle).
+                // A través de extras se puede acceder al Aplication (al igual que se podia al Bundle).
                 val application = extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ListApplication
 
                 // Puedo acceder a través de 'application' al casos de uso que le pasamos por parámetro.

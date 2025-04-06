@@ -866,7 +866,4 @@ En conclusión vemos como en una `unica actividad` es sufiente yo navegar entre 
 
 Se `navega` simplemente `invocandolas` a través de `un grafo de navegación` a que pantalla es la que tengo que invocar.
 
-
-
-
-
+## 8. ... Fin
